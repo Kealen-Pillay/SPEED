@@ -21,3 +21,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "speed-cise-2022"
           heroku_email: "speedcise@gmail.com"
+      
+      - name: Run the tests
+        run: npm test

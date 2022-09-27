@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "prepare-backend": "npm install",
-    "prepare-frontend": "cd frontend/ && npm install",
-    "build-frontend": "cd frontend/ && npm run build",
-    "test-frontend": "cd frontend/ && npm test",
+    "prepare-frontend": "cd frontend && npm install",
+    "build-frontend": "cd frontend && npm run build",
+    "test-frontend": "cd frontend && npm test",
     "start": "node index.js",
     "app": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1",

@@ -1,4 +1,4 @@
 {
     "mongoURI": 
-    "mongodb+srv://cisespeed:dhUT8LsnzWpHwB9v@cise-speed.flebtct.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb+srv://cisespeed:dhUT8LsnzWpHwB9v@cise-speed.flebtct.mongodb.net/SPEED?retryWrites=true&w=majority"
 }

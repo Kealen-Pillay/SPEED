@@ -7,7 +7,7 @@ router.get("/test", (req, res) => res.send("article route testing!"));
 
 router.get("/", (req, res) => {
   Article.find()
-    .then((article) => res.json(articles))
+    .then((articles) => res.json(articles))
     .catch((err) =>
       res.status(404).json({ noarticlesfound: "No Articles found" })
     );

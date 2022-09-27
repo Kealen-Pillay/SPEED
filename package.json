@@ -10,7 +10,7 @@
     "test-frontend": "cd frontend && npm test",
     "start": "node index.js",
     "app": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd frontend && npm test",
     "heroku-postbuild": "npm run prepare-frontend && npm run build-frontend",
     "build": "cd frontend && npm run build"
   },

@@ -9,7 +9,7 @@
     "build-frontend": "cd frontend && npm run build",
     "start": "node index.js",
     "app": "nodemon index.js",
-    "test": "cd frontend && npm test",
+    "test": "cd frontend/ && npm test",
     "heroku-postbuild": "npm run prepare-frontend && npm run build-frontend",
     "build": "cd frontend && npm run build"
   },

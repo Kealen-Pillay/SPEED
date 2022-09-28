@@ -7,7 +7,6 @@
     "prepare-backend": "npm install",
     "prepare-frontend": "cd frontend && npm install",
     "build-frontend": "cd frontend && npm run build",
-    "test-frontend": "cd frontend && npm test",
     "start": "node index.js",
     "app": "nodemon index.js",
     "test": "cd frontend && npm test",

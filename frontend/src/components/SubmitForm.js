@@ -1,19 +1,30 @@
 import React from "react";
-import { Typography, Box, TextField } from "@mui/material";
+import "./SubmitForm.css";
 
 export const SubmitForm = () => {
   return (
-    <>
-      <Box>
-        <Typography sx={{}}>Submit Article</Typography>
-        <TextField variant="outlined" label="Title" />
-        <TextField variant="outlined" label="Author" />
-        <TextField variant="outlined" label="DOI" />
-        <TextField variant="outlined" label="Journal Name" />
-        <TextField variant="outlined" label="Volume" />
-        <TextField variant="outlined" label="Number" />
-        <TextField variant="outlined" label="Title" />
-      </Box>
-    </>
+    <div className="container">
+      <form>
+        <h1>Submit Article</h1>
+        <input type="text" required placeholder="Title"></input>
+        <input type="text" required placeholder="Journal Name"></input>
+        <input type="number" required placeholder="Volume"></input>
+        <input type="text" required placeholder="Pages"></input>
+        <input type="text" required placeholder="DOI"></input>
+        <input type="text" required placeholder="Practice"></input>
+        <input type="text" required placeholder="Claim"></input>
+        <input type="text" required placeholder="Research Type"></input>
+        <input type="text" required placeholder="Author"></input>
+        <input type="text" required placeholder="Description"></input>
+        <input
+          id="publishedDate"
+          type="date"
+          placeholder="Published Date"
+          required
+        ></input>
+        <input type="text" required placeholder="Publisher"></input>
+        <button>Submit Article</button>
+      </form>
+    </div>
   );
 };

@@ -36,3 +36,40 @@
     transform: rotate(360deg);
   }
 }
+
+button {
+  border-radius: 0.5rem;
+  background-color: transparent;
+  border-color: #282c34;
+}
+
+body {
+  background: linear-gradient(115deg, #ff5f6d, #ffc371);
+  background-size: 200% 200%;
+  animation: gradient-animation 30s ease infinite;
+  color: white;
+}
+
+@-webkit-keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

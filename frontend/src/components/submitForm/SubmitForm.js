@@ -31,15 +31,16 @@ export const SubmitForm = () => {
       journalName: journalName,
       volume: volume,
       pages: pages,
-      DOI: DOI,
+      doi: DOI,
       practice: practice,
       claim: claim,
       researchType: researchType,
       author: author,
       description: description,
-      publishedDate: publishedDate,
+      published_date: publishedDate,
       publisher: publisher,
     };
+    console.log(submissionData);
     axios
       .post("http://localhost:8082/api/articles", submissionData)
       .then((res) => {

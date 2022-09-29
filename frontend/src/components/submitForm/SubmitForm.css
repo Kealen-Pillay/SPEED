@@ -7,7 +7,6 @@ form {
 }
 .container {
   width: 20%;
-  margin-top: 2.5rem;
 }
 
 input {
@@ -23,10 +22,17 @@ h1 {
 
 button {
   transition: all 400ms ease;
+  background-color: #2f2f2f;
+  color: white;
 }
 
 button:hover {
   background-color: white;
   color: black;
   transform: scale(1.1);
+}
+
+#searchButton, #homeButton {
+  margin-left: 1rem;
+  margin-top: 1rem;
 }

@@ -4,6 +4,8 @@ import "./SubmitForm.css";
 export const SubmitForm = () => {
   return (
     <body>
+      <button id="homeButton">Home</button>
+      <button id="searchButton">Search Articles</button>
       <div className="container">
         <form>
           <h1>Submit Article</h1>

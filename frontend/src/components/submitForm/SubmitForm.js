@@ -55,7 +55,6 @@ export const SubmitForm = () => {
         setPublishedDate();
         setPublisher("");
         document.getElementById("form").reset();
-        console.log("Submitted Article");
       })
       .catch((err) => {
         console.log("Error Submitting Article: " + err);

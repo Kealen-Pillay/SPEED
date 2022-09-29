@@ -20,7 +20,7 @@ export const SubmitForm = () => {
   const navigate = useNavigate();
 
   const navigateHome = () => {
-    navigate("/home");
+    navigate("/");
   };
 
   const postArticle = (e) => {

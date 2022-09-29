@@ -5,7 +5,6 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-size: 20rem;
-  animation: gradient-animation 10s ease infinite;
 }
 
 .titleContainer {
@@ -14,28 +13,10 @@
   min-height: 100vh;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 
-@-webkit-keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-@keyframes gradient-animation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.buttonContainer {
+  width: 20%;
+  justify-content: space-between;
 }

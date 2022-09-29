@@ -24,7 +24,6 @@ export const SubmitForm = () => {
   };
 
   const postArticle = (e) => {
-    console.log("posting article");
     e.preventDefault();
     const submissionData = {
       title: title,
@@ -40,7 +39,6 @@ export const SubmitForm = () => {
       published_date: publishedDate,
       publisher: publisher,
     };
-    console.log(submissionData);
     axios
       .post("http://localhost:8082/api/articles", submissionData)
       .then((res) => {
@@ -56,6 +54,7 @@ export const SubmitForm = () => {
         setDescription("");
         setPublishedDate();
         setPublisher("");
+        document.getElementById("form").reset();
         console.log("Submitted Article");
       })
       .catch((err) => {
@@ -72,7 +71,7 @@ export const SubmitForm = () => {
         <h6 className="gradient-text">Search Articles</h6>
       </button>
       <div className="container">
-        <form onSubmit={postArticle}>
+        <form id="form" onSubmit={postArticle}>
           <h1>Submit Article</h1>
           <input
             type="text"

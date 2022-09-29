@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./SubmitForm.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const SubmitForm = () => {
   const [title, setTitle] = useState("");
@@ -22,6 +23,45 @@ export const SubmitForm = () => {
     navigate("/home");
   };
 
+  const postArticle = (e) => {
+    console.log("posting article");
+    e.preventDefault();
+    const submissionData = {
+      title: title,
+      journalName: journalName,
+      volume: volume,
+      pages: pages,
+      DOI: DOI,
+      practice: practice,
+      claim: claim,
+      researchType: researchType,
+      author: author,
+      description: description,
+      publishedDate: publishedDate,
+      publisher: publisher,
+    };
+    axios
+      .post("http://localhost:8082/api/articles", submissionData)
+      .then((res) => {
+        setTitle("");
+        setJournalName("");
+        setVolume();
+        setPages("");
+        setDOI("");
+        setPractice("");
+        setClaim("");
+        setResearchType("");
+        setAuthor("");
+        setDescription("");
+        setPublishedDate();
+        setPublisher("");
+        console.log("Submitted Article");
+      })
+      .catch((err) => {
+        console.log("Error Submitting Article: " + err);
+      });
+  };
+
   return (
     <body>
       <button id="homeButton" onClick={navigateHome}>
@@ -31,7 +71,7 @@ export const SubmitForm = () => {
         <h6 className="gradient-text">Search Articles</h6>
       </button>
       <div className="container">
-        <form>
+        <form onSubmit={postArticle}>
           <h1>Submit Article</h1>
           <input
             type="text"
@@ -119,7 +159,7 @@ export const SubmitForm = () => {
             value={publisher}
             onChange={(publisher) => setPublisher(publisher.target.value)}
           ></input>
-          <button>
+          <button type="submit">
             <h6 className="gradient-text">Submit Article</h6>
           </button>
         </form>

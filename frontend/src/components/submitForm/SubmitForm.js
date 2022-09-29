@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./SubmitForm.css";
+import { useNavigate } from "react-router-dom";
 
 export const SubmitForm = () => {
   const [title, setTitle] = useState("");
@@ -15,8 +16,10 @@ export const SubmitForm = () => {
   const [publishedDate, setPublishedDate] = useState();
   const [publisher, setPublisher] = useState("");
 
+  const navigate = useNavigate();
+
   const navigateHome = () => {
-    console.log("home");
+    navigate("/home");
   };
 
   return (
@@ -84,7 +87,9 @@ export const SubmitForm = () => {
             required
             placeholder="Research Type"
             value={researchType}
-            onChange={(researchType) => setResearchType(researchType.target.value)}
+            onChange={(researchType) =>
+              setResearchType(researchType.target.value)
+            }
           ></input>
           <input
             type="text"

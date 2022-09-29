@@ -26,10 +26,11 @@ button {
   color: white;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  padding-top: 0.5rem;
 }
 
 button:hover {
-  background-color: white;
   color: black;
   transform: scale(1.1);
 }

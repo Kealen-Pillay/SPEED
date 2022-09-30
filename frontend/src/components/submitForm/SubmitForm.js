@@ -107,13 +107,13 @@ export const SubmitForm = () => {
             value={DOI}
             onChange={(DOI) => setDOI(DOI.target.value)}
           ></input>
-          <input
-            type="text"
-            required
-            placeholder="Practice"
-            value={practice}
-            onChange={(practice) => setPractice(practice.target.value)}
-          ></input>
+          <select onChange={(practice) => setPractice(practice.target.value)}>
+            <option value="" disabled selected>
+              Practice
+            </option>
+            <option value="TDD">TDD</option>
+            <option value="BDD">BDD</option>
+          </select>
           <input
             type="text"
             required

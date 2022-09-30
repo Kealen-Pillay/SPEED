@@ -58,6 +58,7 @@ export const SubmitForm = () => {
         document.getElementById("form").reset();
       })
       .catch((err) => {
+        alert("Unable to submit form. Please check fields have been entered correctly.");
         console.log("Error Submitting Article: " + err);
       });
   };
@@ -72,7 +73,10 @@ export const SubmitForm = () => {
       </button>
       <div className="container">
         <h1>Submit Article</h1>
-        <select onChange={(format) => setFormatType(format.target.value)}>
+        <select
+          id="formSelection"
+          onChange={(format) => setFormatType(format.target.value)}
+        >
           <option value="" disabled selected>
             Select a Upload Format
           </option>
@@ -174,7 +178,12 @@ export const SubmitForm = () => {
             </button>
           </form>
         ) : (
-          <input type="file" />
+          <div id="bibtex">
+            <input type="file" />
+            <button>
+              <h6 className="gradient-text">Submit Article</h6>
+            </button>
+          </div>
         )}
       </div>
     </body>

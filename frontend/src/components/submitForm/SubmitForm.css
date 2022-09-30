@@ -1,19 +1,41 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
-form {
+form,
+#bibtex {
+  width: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-}
-.container {
-  width: 20%;
+  justify-content: center;
 }
 
-input, select {
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+select {
+  font-size: 16px;
+  border: 1px solid #ccc;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input,
+form select {
   width: 100%;
   border-radius: 0.5rem;
   border-color: transparent;
   padding: 0.2rem;
+  margin-bottom: 1rem;
+}
+
+#formSelection {
+  margin-bottom: 10px;
+  width: max-content;
+  padding: 0 10px 0 10px;
 }
 
 h1 {

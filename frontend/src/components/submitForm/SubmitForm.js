@@ -19,6 +19,8 @@ export const SubmitForm = () => {
   const [formatType, setFormatType] = useState("");
 
   const navigate = useNavigate();
+  const Cite = require("citation-js");
+  require("@citation-js/plugin-bibtex");
 
   const navigateHome = () => {
     navigate("/");
@@ -58,10 +60,38 @@ export const SubmitForm = () => {
         document.getElementById("form").reset();
       })
       .catch((err) => {
-        alert("Unable to submit form. Please check fields have been entered correctly.");
+        alert(
+          "Unable to submit form. Please check fields have been entered correctly."
+        );
         console.log("Error Submitting Article: " + err);
       });
   };
+
+  //bibtex stuff
+  const parseBibtex = async (bibtex, callback) => {
+    let reader = new FileReader();
+    reader.onload = async () => {
+      const result = new Cite(reader.result);
+      if (result != null && result.get().length > 0) {
+        return result;
+      }
+    };
+    try {
+      reader.readAsText(bibtex);
+    } catch (err) {
+      return null;
+    }
+  };
+
+  const submitBibtex = (e) => {
+    e.preventDefault();
+    const file = parseBibtex(e.target.files[0]);
+    // let bibtexParse = require("@orcid/bibtex-parse-js");
+    // let sample = bibtexParse.toJSON(e.target.value);
+    // console.log(sample);
+    console.log(file);
+  };
+  //^^^
 
   return (
     <body>
@@ -180,7 +210,7 @@ export const SubmitForm = () => {
         ) : (
           <div id="bibtex">
             <input type="file" />
-            <button>
+            <button onClick={submitBibtex}>
               <h6 className="gradient-text">Submit Article</h6>
             </button>
           </div>

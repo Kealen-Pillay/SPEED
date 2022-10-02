@@ -75,8 +75,7 @@ export const SubmitForm = () => {
       const bibtexContent = e.target.result;
       console.log(bibtexContent);
     };
-      reader.readAsText(e.target.files[0]);
-
+    reader.readAsText(e.target.files[0]);
   };
 
   return (
@@ -195,7 +194,12 @@ export const SubmitForm = () => {
           </form>
         ) : (
           <div id="bibtex">
-            <input type="file" onChange={(e) => {readBibtex(e)}}/>
+            <input
+              type="file"
+              onChange={(e) => {
+                readBibtex(e);
+              }}
+            />
             <button>
               <h6 className="gradient-text">Submit Article</h6>
             </button>

@@ -16,7 +16,7 @@ export const SubmitForm = () => {
   const [description, setDescription] = useState("");
   const [publishedDate, setPublishedDate] = useState();
   const [publisher, setPublisher] = useState("");
-  const [formatType, setFormatType] = useState("");
+  const [formatType, setFormatType] = useState("form");
   const [bibtex, setBibtex] = useState("");
 
   const navigate = useNavigate();

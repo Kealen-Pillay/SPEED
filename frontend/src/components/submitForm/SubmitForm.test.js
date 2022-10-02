@@ -15,3 +15,13 @@ test("Renders Submit Article Page", async () => {
   });
   expect(submitScreen).toBeInTheDocument();
 });
+
+test("Prevents Submission of Empty Fields", async () => {
+  render(<App />);
+  const user = userEvent;
+  const navigateSubmitPage = screen.getByRole("button", {
+    name: /Submit Article/i,
+  });
+  await user.click(navigateSubmitPage);
+  
+});

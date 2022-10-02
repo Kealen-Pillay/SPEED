@@ -16,12 +16,15 @@ test("Renders Submit Article Page", async () => {
   expect(submitScreen).toBeInTheDocument();
 });
 
-test("Prevents Submission of Empty Fields", async () => {
+test("Succesful Submission of completed Fields", async () => {
   render(<App />);
   const user = userEvent;
   const navigateSubmitPage = screen.getByRole("button", {
     name: /Submit Article/i,
   });
   await user.click(navigateSubmitPage);
-  
+
+  const titleInput = screen.getByPlaceholderText(/Title/i);
+  await user.type(titleInput, "testTitle");
+  expect(titleInput).toHaveValue("testTitle"); 
 });

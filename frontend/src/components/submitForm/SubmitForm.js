@@ -17,6 +17,7 @@ export const SubmitForm = () => {
   const [publishedDate, setPublishedDate] = useState();
   const [publisher, setPublisher] = useState("");
   const [formatType, setFormatType] = useState("");
+  const [bibtex, setBibtex] = useState("");
 
   const navigate = useNavigate();
   const Cite = require("citation-js");
@@ -67,31 +68,16 @@ export const SubmitForm = () => {
       });
   };
 
-  //bibtex stuff
-  const parseBibtex = async (bibtex, callback) => {
-    let reader = new FileReader();
-    reader.onload = async () => {
-      const result = new Cite(reader.result);
-      if (result != null && result.get().length > 0) {
-        return result;
-      }
-    };
-    try {
-      reader.readAsText(bibtex);
-    } catch (err) {
-      return null;
-    }
-  };
-
-  const submitBibtex = (e) => {
+  const readBibtex = (e) => {
     e.preventDefault();
-    const file = parseBibtex(e.target.files[0]);
-    // let bibtexParse = require("@orcid/bibtex-parse-js");
-    // let sample = bibtexParse.toJSON(e.target.value);
-    // console.log(sample);
-    console.log(file);
+    let reader = new FileReader();
+    reader.onload = async (e) => {
+      const bibtexContent = e.target.result;
+      console.log(bibtexContent);
+    };
+      reader.readAsText(e.target.files[0]);
+
   };
-  //^^^
 
   return (
     <body>
@@ -209,8 +195,8 @@ export const SubmitForm = () => {
           </form>
         ) : (
           <div id="bibtex">
-            <input type="file" />
-            <button onClick={submitBibtex}>
+            <input type="file" onChange={(e) => {readBibtex(e)}}/>
+            <button>
               <h6 className="gradient-text">Submit Article</h6>
             </button>
           </div>

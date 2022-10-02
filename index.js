@@ -31,7 +31,7 @@ var cors = require("cors");
 const connectDB = require("./config/db");
 
 // routes
-const books = require("./routes/api/books");
+const articles = require("./routes/api/articles");
 
 const app = express();
 const port = process.env.PORT || 8082;
@@ -41,7 +41,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 app.use(express.json({ extended: false }));
 
-app.use("/api/books", books);
+app.use("/api/articles", articles);
 
 // Connect Database
 connectDB();

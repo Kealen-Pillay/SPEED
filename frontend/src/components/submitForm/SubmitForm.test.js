@@ -23,7 +23,6 @@ test("Succesful Submission of completed Fields", async () => {
     name: /Submit Article/i,
   });
   await user.click(navigateSubmitPage);
-
   const titleInput = screen.getByPlaceholderText(/Title/i);
   await user.type(titleInput, "testTitle");
   expect(titleInput).toHaveValue("testTitle"); 

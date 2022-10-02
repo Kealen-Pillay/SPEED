@@ -19,8 +19,6 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
@@ -573,6 +571,14 @@ export const SearchArticle = () => {
     //   </div>
     // </body>
 
-    <EnhancedTable />
+    <body>
+      <button id="homeButton" onClick={navigateHome}>
+         <h6 className="gradient-text">Home</h6>
+      </button>
+      <button id="searchButton" onClick={navigateSubmit}>
+        <h6 className="gradient-text">Submit Article</h6>
+      </button>
+      <EnhancedTable />
+    </body>
   );
 };

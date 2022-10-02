@@ -149,22 +149,21 @@ export const SearchArticle = () => {
         // setPublishedDates(res.data.map((article) => article.published_date));
         // setPublishers(res.data.map((article) => article.publisher));
         res.data.map((article) => {
-          const newArticle = [
-            article.title,
-            article.journalName,
-            article.volume,
-            article.pages,
-            article.doi,
-            article.practice,
-            article.claim,
-            article.researchType,
-            article.author,
-            article.description,
-            article.published_date,
-            article.publishers,
-          ];
+          const newArticle = {
+            title: article.title,
+            journalName: article.journalName,
+            volume: article.volume,
+            pages: article.pages,
+            doi: article.doi,
+            practice: article.practice,
+            claim: article.claim,
+            researchType: article.researchType,
+            author: article.author,
+            description: article.description,
+            published_date: article.published_date,
+            publishers: article.publishers,
+          };
           rows.push(newArticle);
-          console.log(newArticle);
         });
       })
       .catch((err) => {
@@ -197,7 +196,6 @@ export const SearchArticle = () => {
     //   .catch((err) => {
     //     console.log(err);
     //   }),
-    createData("r", "a", 2, "a", "b", "a", "a", "a", "a", "a", "a", "a"),
   ];
 
   const descendingComparator = (a, b, orderBy) => {
@@ -461,11 +459,10 @@ export const SearchArticle = () => {
                 rowCount={rows.length}
               />
               <TableBody>
-                {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                   rows.slice().sort(getComparator(order, orderBy)) */}
+                {console.log(rows)}
                 {rows
-                  .slice()
-                  .sort(getComparator(order, orderBy))
+                  // .slice()
+                  // .sort(getComparator(order, orderBy))
                   .map((row, index) => {
                     const isItemSelected = isSelected(row.name);
                     const labelId = `enhanced-table-checkbox-${index}`;
@@ -496,9 +493,8 @@ export const SearchArticle = () => {
                           scope="row"
                           padding="none"
                         >
-                          {row.name}
+                          {row.title}
                         </TableCell>
-                        <TableCell align="right">{"journal"}</TableCell>
                         <TableCell align="right">{row.journalName}</TableCell>
                         <TableCell align="right">{row.volume}</TableCell>
                         <TableCell align="right">{row.pages}</TableCell>
@@ -537,10 +533,6 @@ export const SearchArticle = () => {
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
         </Paper>
-        <FormControlLabel
-          control={<Switch checked={dense} onChange={handleChangeDense} />}
-          label="Dense padding"
-        />
       </Box>
     );
   };

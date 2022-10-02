@@ -32,14 +32,14 @@ export const SearchArticle = () => {
         setTitles(res.data.map((article) => article.title));
         setJournalNames(res.data.map((article) => article.journalName));
         setVolumes(res.data.map((article) => article.volume));
-        setPages(res.data.map((article) => article.page));
+        setPages(res.data.map((article) => article.pages));
         setDois(res.data.map((article) => article.doi));
         setPractices(res.data.map((article) => article.practice));
         setClaims(res.data.map((article) => article.claim));
         setResearchTypes(res.data.map((article) => article.researchType));
         setAuthors(res.data.map((article) => article.author));
         setDescriptions(res.data.map((article) => article.description));
-        setPublishedDates(res.data.map((article) => article.publishedDate));
+        setPublishedDates(res.data.map((article) => article.published_date));
         setPublishers(res.data.map((article) => article.publisher));
       })
       .catch((err) => {

@@ -461,8 +461,8 @@ export const SearchArticle = () => {
               <TableBody>
                 {console.log(rows)}
                 {rows
-                  // .slice()
-                  // .sort(getComparator(order, orderBy))
+                  .slice()
+                  .sort(getComparator(order, orderBy))
                   .map((row, index) => {
                     const isItemSelected = isSelected(row.name);
                     const labelId = `enhanced-table-checkbox-${index}`;

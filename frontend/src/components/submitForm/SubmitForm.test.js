@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import App from "../../App";
+import { SubmitForm } from "./SubmitForm";
 import userEvent from "@testing-library/user-event";
 
 test("Renders Submit Article Page", async () => {
@@ -16,7 +17,7 @@ test("Renders Submit Article Page", async () => {
   expect(submitScreen).toBeInTheDocument();
 });
 
-test("Succesful Submission of completed Fields", async () => {
+test("Successful user input in text fields", async () => {
   render(<App />);
   const user = userEvent;
   const navigateSubmitPage = screen.getByRole("button", {
@@ -26,4 +27,16 @@ test("Succesful Submission of completed Fields", async () => {
   const titleInput = screen.getByPlaceholderText(/Title/i);
   await user.type(titleInput, "testTitle");
   expect(titleInput).toHaveValue("testTitle"); 
+});
+
+test("Select an input format", async () => {
+  render(<App />);
+  const user = userEvent;
+  const navigateSubmitPage = screen.getByRole("button", {
+    name: /Submit Article/i,
+  });
+  await user.click(navigateSubmitPage);
+  const select = screen.getByDisplayValue("Select a Upload Format");
+  await user.click(select[2]);
+  expect(select[2]).toHaveValue("bibtex");
 });

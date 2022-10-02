@@ -44,7 +44,7 @@ export const SubmitForm = () => {
       publisher: publisher,
     };
     axios
-      .post("http://localhost:8082/api/articles", submissionData)
+      .post("/api/articles", submissionData)
       .then((res) => {
         setTitle("");
         setJournalName("");

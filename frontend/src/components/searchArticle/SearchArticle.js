@@ -16,14 +16,13 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
-import DeleteIcon from "@mui/icons-material/Delete";
-import FilterListIcon from "@mui/icons-material/FilterList";
 import { visuallyHidden } from "@mui/utils";
 
 export const SearchArticle = () => {
+  useEffect(() => {
+    getData();
+  }, []);
+
   const [titles, setTitles] = useState([]);
   const [journalNames, setJournalNames] = useState([]);
   const [volumes, setVolumes] = useState([]);
@@ -36,11 +35,8 @@ export const SearchArticle = () => {
   const [descriptions, setDescriptions] = useState([]);
   const [publishedDates, setPublishedDates] = useState([]);
   const [publishers, setPublishers] = useState([]);
+  const [rows, setRows] = useState([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   const navigateHome = () => {
     navigate("/");
@@ -147,7 +143,7 @@ export const SearchArticle = () => {
         // setPublishedDates(res.data.map((article) => article.published_date));
         // setPublishers(res.data.map((article) => article.publisher));
         res.data.map((article) => {
-          const newArticle = {
+          let newArticle = {
             title: article.title,
             journalName: article.journalName,
             volume: article.volume,
@@ -159,42 +155,18 @@ export const SearchArticle = () => {
             author: article.author,
             description: article.description,
             published_date: article.published_date,
-            publishers: article.publishers,
+            publishers: article.publisher,
           };
           rows.push(newArticle);
         });
+        console.log(rows);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const rows = [
-    // axios
-    //   .get("http://localhost:8082/api/articles/")
-    //   .then((res) => {
-    //     res.data.map((article) => {
-    //       console.log(article);
-    //       createData(
-    //         article.title,
-    //         article.journalName,
-    //         article.volume,
-    //         article.pages,
-    //         article.doi,
-    //         article.practice,
-    //         article.claim,
-    //         article.researchType,
-    //         article.author,
-    //         article.description,
-    //         article.published_date,
-    //         article.publishers
-    //       );
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   }),
-  ];
+  // const rows = [];
 
   const descendingComparator = (a, b, orderBy) => {
     if (b[orderBy] < a[orderBy]) {
@@ -270,17 +242,6 @@ export const SearchArticle = () => {
     return (
       <TableHead>
         <TableRow>
-          <TableCell padding="checkbox">
-            <Checkbox
-              color="primary"
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={rowCount > 0 && numSelected === rowCount}
-              onChange={onSelectAllClick}
-              inputProps={{
-                "aria-label": "select all articles",
-              }}
-            />
-          </TableCell>
           {headCells.map((headCell) => (
             <TableCell
               key={headCell.id}
@@ -338,7 +299,6 @@ export const SearchArticle = () => {
         {numSelected > 0 ? (
           <Typography
             sx={{ flex: "1 1 100%" }}
-            color="inherit"
             variant="subtitle1"
             component="div"
           >
@@ -355,7 +315,7 @@ export const SearchArticle = () => {
           </Typography>
         )}
 
-        {numSelected > 0 ? (
+        {/* {numSelected > 0 ? (
           <Tooltip title="Delete">
             <IconButton>
               <DeleteIcon />
@@ -366,8 +326,8 @@ export const SearchArticle = () => {
             <IconButton>
               <FilterListIcon />
             </IconButton>
-          </Tooltip>
-        )}
+          </Tooltip> */}
+        {/* )} */}
       </Toolbar>
     );
   };
@@ -428,10 +388,6 @@ export const SearchArticle = () => {
       setPage(0);
     };
 
-    const handleChangeDense = (event) => {
-      setDense(event.target.checked);
-    };
-
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
     // Avoid a layout jump when reaching the last page with empty rows.
@@ -439,8 +395,8 @@ export const SearchArticle = () => {
       page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     return (
-      <Box sx={{ width: "100%" }}>
-        <Paper sx={{ width: "100%", mb: 2 }}>
+      <Box sx={{ width: "80%", marginLeft: "10%", marginTop: "5%" }}>
+        <Paper sx={{ width: "100%", mb: 2, backgroundColor: "transparent" }}>
           <EnhancedTableToolbar numSelected={selected.length} />
           <TableContainer>
             <Table
@@ -452,17 +408,16 @@ export const SearchArticle = () => {
                 numSelected={selected.length}
                 order={order}
                 orderBy={orderBy}
-                onSelectAllClick={handleSelectAllClick}
+                // onSelectAllClick={handleSelectAllClick}
                 onRequestSort={handleRequestSort}
                 rowCount={rows.length}
               />
               <TableBody>
-                {console.log(rows)}
                 {rows
                   .slice()
                   .sort(getComparator(order, orderBy))
                   .map((row, index) => {
-                    const isItemSelected = isSelected(row.name);
+                    // const isItemSelected = isSelected(row.name);
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     console.log(row);
@@ -471,20 +426,11 @@ export const SearchArticle = () => {
                         hover
                         onClick={(event) => handleClick(event, row.name)}
                         role="checkbox"
-                        aria-checked={isItemSelected}
+                        // aria-checked={isItemSelected}
                         tabIndex={-1}
                         key={row.name}
-                        selected={isItemSelected}
+                        // selected={isItemSelected}
                       >
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            color="primary"
-                            checked={isItemSelected}
-                            inputProps={{
-                              "aria-labelledby": labelId,
-                            }}
-                          />
-                        </TableCell>
                         <TableCell
                           component="th"
                           id={labelId}
@@ -505,7 +451,7 @@ export const SearchArticle = () => {
                         <TableCell align="right">
                           {row.published_date}
                         </TableCell>
-                        <TableCell align="right">{row.publisher}</TableCell>
+                        <TableCell align="right">{row.publishers}</TableCell>
                       </TableRow>
                     );
                   })}
@@ -575,9 +521,41 @@ export const SearchArticle = () => {
       <button id="homeButton" onClick={navigateHome}>
         <h6 className="gradient-text">Home</h6>
       </button>
-      <button id="searchButton" onClick={navigateSubmit}>
+      <button id="submitButton" onClick={navigateSubmit}>
         <h6 className="gradient-text">Submit Article</h6>
       </button>
+      <div id="contentContainer">
+        <div id="selectionContainer">
+          <select>
+            <option disabled selected>
+              SE Practice
+            </option>
+            <option>TDD</option>
+            <option>BDD</option>
+          </select>
+          <select>
+            <option disabled selected>
+              Claim
+            </option>
+            <option>a</option>
+            <option>b</option>
+          </select>
+          <select>
+            <option disabled selected>
+              Start Publication Year
+            </option>
+            <option>2000</option>
+            <option>2001</option>
+          </select>
+          <select>
+            <option disabled selected>
+              End Publication Year
+            </option>
+            <option>2000</option>
+            <option>2001</option>
+          </select>
+        </div>
+      </div>
       <EnhancedTable />
     </body>
   );

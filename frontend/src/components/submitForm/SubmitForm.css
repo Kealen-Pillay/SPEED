@@ -48,7 +48,7 @@ button:hover {
 }
 
 #searchButton,
-#homeButton {
+#homeButton, #submitButton {
   margin-left: 1rem;
   margin-top: 1rem;
 }

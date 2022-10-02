@@ -573,7 +573,7 @@ export const SearchArticle = () => {
 
     <body>
       <button id="homeButton" onClick={navigateHome}>
-         <h6 className="gradient-text">Home</h6>
+        <h6 className="gradient-text">Home</h6>
       </button>
       <button id="searchButton" onClick={navigateSubmit}>
         <h6 className="gradient-text">Submit Article</h6>

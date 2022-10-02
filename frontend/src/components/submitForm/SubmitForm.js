@@ -27,6 +27,10 @@ export const SubmitForm = () => {
     navigate("/");
   };
 
+  const navigateSearch = () => {
+    navigate("/search");
+  };
+
   const postArticle = (e) => {
     e.preventDefault();
     const submissionData = {
@@ -83,7 +87,7 @@ export const SubmitForm = () => {
       <button id="homeButton" onClick={navigateHome}>
         <h6 className="gradient-text">Home</h6>
       </button>
-      <button id="searchButton">
+      <button id="searchButton" onClick={navigateSearch}>
         <h6 className="gradient-text">Search Articles</h6>
       </button>
       <div className="container">

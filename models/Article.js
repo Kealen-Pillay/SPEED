@@ -9,6 +9,18 @@ const ArticleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  volume: {
+    type: Number,
+    required: true,
+  },
+  pages: {
+    type: String,
+    required: true,
+  },
+  doi: {
+    type: String,
+    required: true,
+  },
   practice: {
     type: String,
     required: true,
@@ -17,20 +29,8 @@ const ArticleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  evidenceResult: {
-    type: String,
-    required: true,
-  },
   researchType: {
     type: String,
-    required: true,
-  },
-  participantType: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: Number,
     required: true,
   },
   author: {

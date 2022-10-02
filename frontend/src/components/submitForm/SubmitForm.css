@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+form,
+#bibtex {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+select {
+  font-size: 16px;
+  border: 1px solid #ccc;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input,
+form select {
+  width: 100%;
+  border-radius: 0.5rem;
+  border-color: transparent;
+  padding: 0.2rem;
+  margin-bottom: 1rem;
+}
+
+#formSelection {
+  margin-bottom: 10px;
+  width: max-content;
+  padding: 0 10px 0 10px;
+}
+
+h1 {
+  font-family: "Lato", sans-serif;
+}
+
+button:hover {
+  color: black;
+  transform: scale(1.1);
+}
+
+#searchButton,
+#homeButton {
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+.gradient-text {
+  background-image: linear-gradient(115deg, #ff5f6d, #ffc371);
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+}

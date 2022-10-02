@@ -1,0 +1,23 @@
+.title-text {
+  background: linear-gradient(115deg, #ff5f6d, #ffc371);
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 20rem;
+}
+
+.titleContainer {
+  background-color: #1e1e1e;
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.buttonContainer {
+  width: 20%;
+  justify-content: space-between;
+}
+

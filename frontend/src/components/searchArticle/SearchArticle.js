@@ -154,6 +154,9 @@ export const SearchArticle = (props) => {
             <option>2021</option>
             <option>2022</option>
           </select>
+          <button id="searchButton">
+            <h6 className="gradient-text">Search</h6>
+          </button>
         </div>
         <Box sx={{ height: 400, width: "80%", marginTop: "5%" }}>
           <DataGrid
@@ -165,9 +168,6 @@ export const SearchArticle = (props) => {
             experimentalFeatures={{ newEditingApi: true }}
           />
         </Box>
-        <button id="searchButton">
-          <h6 className="gradient-text">Search</h6>
-        </button>
       </div>
     </body>
   );

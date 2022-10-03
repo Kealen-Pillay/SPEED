@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./SearchArticle.css";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import Box from "@mui/material/Box";
+import { DataGrid } from "@mui/x-data-grid";
 
-export const SearchArticle = () => {
-  const [rows, setRows] = useState([]);
+export const SearchArticle = (props) => {
+  const { articles } = props;
+
   const navigate = useNavigate();
 
   const navigateHome = () => {
@@ -14,182 +16,101 @@ export const SearchArticle = () => {
     navigate("/post");
   };
 
-  const ProductTable = () => {
-    const [sortedField, setSortedField] = useState(null);
-    if (sortedField !== null) {
-      rows.sort((a, b) => {
-        if (a[sortedField] < b[sortedField]) {
-          return -1;
-        }
-        if (a[sortedField] > b[sortedField]) {
-          return 1;
-        }
-        return 0;
-      });
-    }
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>
-              <button
-                type="button"
-                id="sortButton"
-                onClick={() => setSortedField("title")}
-              >
-                Title
-              </button>
-            </th>
-            <th>
-              <button
-                type="button"
-                id="sortButton"
-                onClick={() => setSortedField("journalName")}
-              >
-                Journal Name
-              </button>
-            </th>
-            <th>
-              <button
-                type="button"
-                id="sortButton"
-                onClick={() => setSortedField("volume")}
-              >
-                Volume
-              </button>
-            </th>
-            <th>
-              <button
-                type="button"
-                id="sortButton"
-                onClick={() => setSortedField("pages")}
-              >
-                Pages
-              </button>
-            </th>
-            <th>
-              <button
-                type="button"
-                id="sortButton"
-                onClick={() => setSortedField("doi")}
-              >
-                DOI
-              </button>
-            </th>
-            <th>
-              <button
-                type="button"
-                id="sortButton"
-                onClick={() => setSortedField("practice")}
-              >
-                Practice
-              </button>
-            </th>
-            <th>
-              <button
-                type="button"
-                id="sortButton"
-                onClick={() => setSortedField("claim")}
-              >
-                Claim
-              </button>
-            </th>
-            <th>
-              <button
-                type="button"
-                id="sortButton"
-                onClick={() => setSortedField("researchType")}
-              >
-                Research Type
-              </button>{" "}
-            </th>
-            <th>
-              <button
-                type="button"
-                id="sortButton"
-                onClick={() => setSortedField("author")}
-              >
-                Author
-              </button>
-            </th>
-            <th>
-              <button
-                type="button"
-                id="sortButton"
-                onClick={() => setSortedField("description")}
-              >
-                Description
-              </button>
-            </th>
-            <th>
-              <button
-                type="button"
-                id="sortButton"
-                onClick={() => setSortedField("published_date")}
-              >
-                Published Date
-              </button>{" "}
-            </th>
-            <th>
-              <button
-                type="button"
-                id="sortButton"
-                onClick={() => setSortedField("publishers")}
-              >
-                Publishers
-              </button>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((article) => (
-            <tr key={article.id}>
-              <td>{article.title}</td>
-              <td>{article.journalName}</td>
-              <td>{article.volume}</td>
-              <td>{article.pages}</td>
-              <td>{article.doi}</td>
-              <td>{article.practice}</td>
-              <td>{article.claim}</td>
-              <td>{article.researchType}</td>
-              <td>{article.author}</td>
-              <td>{article.description}</td>
-              <td>{article.published_date}</td>
-              <td>{article.publishers}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
-  };
+  const columns = [
+    { field: "id", headerName: "ID", hide: true },
+    {
+      field: "title",
+      headerName: "Title",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "journal",
+      headerName: "Journal",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "volume",
+      headerName: "Volume",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "pages",
+      headerName: "Pages",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "doi",
+      headerName: "DOI",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "practice",
+      headerName: "Practice",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "claim",
+      headerName: "Claim",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "researchType",
+      headerName: "Research",
+      width: 150,
+      editable: false,
+    },
+    {
+      field: "author",
+      headerName: "Author",
+      type: "string",
+      width: 110,
+      editable: false,
+    },
+    {
+      field: "description",
+      headerName: "Description",
+      type: "string",
+      width: 110,
+      editable: false,
+    },
+    {
+      field: "publishedDate",
+      headerName: "Published Date",
+      type: "string",
+      width: 110,
+      editable: false,
+    },
+    {
+      field: "publishers",
+      headerName: "Publishers",
+      type: "string",
+      width: 110,
+      editable: false,
+    },
+  ];
 
-  const getData = () => {
-    axios
-      .get("http://localhost:8082/api/articles/")
-      .then((res) => {
-        res.data.map((article) => {
-          let newArticle = {
-            title: article.title,
-            journalName: article.journalName,
-            volume: article.volume,
-            pages: article.pages,
-            doi: article.doi,
-            practice: article.practice,
-            claim: article.claim,
-            researchType: article.researchType,
-            author: article.author,
-            description: article.description,
-            published_date: article.published_date,
-            publishers: article.publisher,
-          };
-          rows.push(newArticle);
-        });
-        console.log(rows);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const rows = articles.map((row) => ({
+    id: row._id,
+    title: row.title,
+    journal: row.journalName,
+    volume: row.volume,
+    pages: row.pages,
+    doi: row.doi,
+    practice: row.practice,
+    claim: row.claim,
+    researchType: row.researchType,
+    author: row.author,
+    description: row.description,
+    publishedDate: row.published_date,
+    publishers: row.publisher,
+  }));
 
   return (
     <body>
@@ -230,8 +151,17 @@ export const SearchArticle = () => {
             <option>2001</option>
           </select>
         </div>
-        <ProductTable />
-        <button id="searchButton" onClick={getData}>
+        <Box sx={{ height: 400, width: "80%", marginTop: "5%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            disableSelectionOnClick
+            experimentalFeatures={{ newEditingApi: true }}
+          />
+        </Box>
+        <button id="searchButton">
           <h6 className="gradient-text">Search</h6>
         </button>
       </div>

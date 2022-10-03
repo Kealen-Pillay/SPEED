@@ -128,27 +128,31 @@ export const SearchArticle = (props) => {
             </option>
             <option>TDD</option>
             <option>BDD</option>
+            <option>Agile</option>
           </select>
           <select>
             <option disabled selected>
               Claim
             </option>
-            <option>a</option>
-            <option>b</option>
+            <option>Beneficial to quality</option>
+            <option>Detrimental to development</option>
+            <option>Reduces development time</option>
           </select>
           <select>
             <option disabled selected>
               Start Publication Year
             </option>
-            <option>2000</option>
-            <option>2001</option>
+            <option>2020</option>
+            <option>2021</option>
+            <option>2022</option>
           </select>
           <select>
             <option disabled selected>
               End Publication Year
             </option>
-            <option>2000</option>
-            <option>2001</option>
+            <option>2020</option>
+            <option>2021</option>
+            <option>2022</option>
           </select>
         </div>
         <Box sx={{ height: 400, width: "80%", marginTop: "5%" }}>

@@ -104,7 +104,17 @@ export const SearchArticle2 = (props) => {
   const rows = articles.map((row) => ({
     id: row._id,
     title: row.title,
-    journal: row.journal,
+    journal: row.journalName,
+    volume: row.volume,
+    pages: row.pages,
+    doi: row.doi,
+    practice: row.practice,
+    claim: row.claim,
+    researchType: row.researchType,
+    author: row.author,
+    description: row.description,
+    publishedDate: row.published_date,
+    publishers: row.publisher,
   }));
 
   return (

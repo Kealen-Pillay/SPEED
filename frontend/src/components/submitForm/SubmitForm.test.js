@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import App from "../../App";
-import { SubmitForm } from "./SubmitForm";
 import userEvent from "@testing-library/user-event";
 
 test("Renders Submit Article Page", async () => {

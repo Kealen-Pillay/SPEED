@@ -77,7 +77,6 @@ export const SubmitForm = () => {
     let reader = new FileReader();
     reader.onload = async (e) => {
       const bibtexContent = e.target.result;
-      console.log(bibtexContent);
     };
     reader.readAsText(e.target.files[0]);
   };
@@ -146,13 +145,20 @@ export const SubmitForm = () => {
               <option value="TDD">TDD</option>
               <option value="BDD">BDD</option>
             </select>
-            <input
-              type="text"
-              required
-              placeholder="Claim"
-              value={claim}
-              onChange={(claim) => setClaim(claim.target.value)}
-            ></input>
+            <select onChange={(claim) => setClaim(claim.target.value)}>
+              <option value="" disabled selected>
+                Claim
+              </option>
+              <option value="Beneficial to quality">
+                Beneficial to quality
+              </option>
+              <option value="Detrimental to development">
+                Detrimental to development
+              </option>
+              <option value="Reduces development time">
+                Reduces development time
+              </option>
+            </select>
             <input
               type="text"
               required

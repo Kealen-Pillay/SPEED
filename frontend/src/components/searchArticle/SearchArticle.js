@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useState } from "react";
+import { textAlign } from "@mui/system";
 
 export const SearchArticle = () => {
   const [articleList, setArticleList] = useState([]);
@@ -22,7 +23,6 @@ export const SearchArticle = () => {
       if (claim !== "") {
         url.searchParams.append("claim", claim);
       }
-      console.log(url);
       await axios
         .get(url)
         .then((res) => {
@@ -33,7 +33,6 @@ export const SearchArticle = () => {
         });
     };
     filterData();
-    // console.log(claim);
   }, [practice, claim]);
 
   useEffect(() => {
@@ -53,7 +52,6 @@ export const SearchArticle = () => {
     await axios
       .get("http://localhost:8082/api/articles")
       .then((res) => {
-        console.log(res.data);
         setArticleList(res.data);
       })
       .catch((err) => {
@@ -168,6 +166,7 @@ export const SearchArticle = () => {
         <h6 className="gradient-text">Submit Article</h6>
       </button>
       <div id="contentContainer">
+        <h1>Search Articles</h1>
         <div id="selectionContainer">
           <select onChange={(data) => setPractice(data.target.value)}>
             <option selected value="">
@@ -202,7 +201,7 @@ export const SearchArticle = () => {
             <option>2022</option>
           </select>
         </div>
-        <Box sx={{ height: 400, width: "80%", marginTop: "5%" }}>
+        <Box sx={{ height: 400, width: "86%", marginTop: "5%"}}>
           <DataGrid
             rows={rows}
             columns={columns}

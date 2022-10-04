@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SearchArticle.css";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
@@ -8,10 +8,15 @@ import { useState } from "react";
 
 export const SearchArticle = (props) => {
   const { articles } = props;
+  const [articleList, setArticleList] = useState([]);
   const [practice, setPractice] = useState("");
   const [claim, setClaim] = useState("");
   const [startPubDate, setStartPubDate] = useState("");
   const [endPubDate, setEndPubDate] = useState("");
+
+  useEffect(() => {
+    filterData();
+  }, [practice, claim]);
 
   const navigate = useNavigate();
 
@@ -23,14 +28,17 @@ export const SearchArticle = (props) => {
   };
 
   const filterData = async () => {
+    const url = new URL("http://localhost:8082/api/articles/filter");
+    if (practice !== "") {
+      url.searchParams.append("practice", practice);
+    }
+    if (claim !== "claim") {
+      url.searchParams.append("claim", claim);
+    }
     await axios
-      .get("http://localhost:8082/api/articles/filter", {
-        params: {
-          practice: practice,
-        },
-      })
+      .get(url)
       .then((res) => {
-        console.log(res.data);
+        setArticleList(res);
       })
       .catch((err) => {
         console.log("error:" + err);
@@ -38,7 +46,7 @@ export const SearchArticle = (props) => {
   };
 
   const columns = [
-    { field: "id", headerName: "ID", hide: true },``
+    { field: "id", headerName: "ID", hide: true },
     {
       field: "title",
       headerName: "Title",
@@ -132,6 +140,7 @@ export const SearchArticle = (props) => {
     publishedDate: row.published_date,
     publishers: row.publisher,
   }));
+
   return (
     <body>
       <button id="homeButton" onClick={navigateHome}>

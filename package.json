@@ -4,14 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "echo\"Error: Link to React Tests\" && exit 1",
     "prepare-backend": "npm install",
     "prepare-frontend": "cd frontend && npm install",
     "build-frontend": "cd frontend && npm run build",
+    "test-frontend": "cd frontend && npm test",
     "start": "node index.js",
     "app": "nodemon index.js",
-    "test": "cd frontend/ && npm test",
-    "heroku-postbuild": "npm run prepare-frontend && npm run build-frontend",
-    "build": "cd frontend && npm run build"
+    "heroku-postbuild": "npm run prepare-frontend && npm run build-frontend"
   },
   "repository": {
     "type": "git",

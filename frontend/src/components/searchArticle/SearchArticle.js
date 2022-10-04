@@ -50,7 +50,7 @@ export const SearchArticle = () => {
 
   const getData = async () => {
     await axios
-      .get("api/articles")
+      .get("/api/articles")
       .then((res) => {
         setArticleList(res.data);
       })

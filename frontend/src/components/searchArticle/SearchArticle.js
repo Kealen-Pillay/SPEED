@@ -19,9 +19,9 @@ export const SearchArticle = () => {
       if (practice !== "") {
         url.searchParams.append("practice", practice);
       }
-      // if (claim !== "") {
-      //   url.searchParams.append("claim", claim);
-      // }
+      if (claim !== "") {
+        url.searchParams.append("claim", claim);
+      }
       console.log(url);
       await axios
         .get(url)
@@ -170,16 +170,16 @@ export const SearchArticle = () => {
       <div id="contentContainer">
         <div id="selectionContainer">
           <select onChange={(data) => setPractice(data.target.value)}>
-            <option disabled selected value="">
-              SE Practice
+            <option selected value="">
+              Show All SE Practices
             </option>
             <option>TDD</option>
             <option>BDD</option>
             <option>Agile</option>
           </select>
           <select onChange={(data) => setClaim(data.target.value)}>
-            <option disabled selected value="">
-              Claim
+            <option selected value="">
+              Show All Claims
             </option>
             <option>Beneficial to quality</option>
             <option>Detrimental to development</option>
@@ -201,9 +201,6 @@ export const SearchArticle = () => {
             <option>2021</option>
             <option>2022</option>
           </select>
-          <button id="searchButton">
-            <h6 className="gradient-text">Search</h6>
-          </button>
         </div>
         <Box sx={{ height: 400, width: "80%", marginTop: "5%" }}>
           <DataGrid

@@ -21,6 +21,14 @@ router.get("/:id", (req, res) => {
     );
 });
 
+// router.get("/filter", (req, res) => {
+//   Article.find(req.params.practice)
+//     .then((article) => res.json(article))
+//     .catch((err) =>
+//       res.status(404).json({ noarticlesfound: "No Articles found" })
+//     );
+// });
+
 router.post("/", (req, res) => {
   Article.create(req.body)
     .then((article) => res.json({ msg: "Article added successfully" }))

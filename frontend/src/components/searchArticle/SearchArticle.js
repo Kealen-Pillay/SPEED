@@ -3,9 +3,15 @@ import "./SearchArticle.css";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
+import axios from "axios";
+import { useState } from "react";
 
 export const SearchArticle = (props) => {
   const { articles } = props;
+  const [practice, setPractice] = useState("");
+  const [claim, setClaim] = useState("");
+  const [startPubDate, setStartPubDate] = useState("");
+  const [endPubDate, setEndPubDate] = useState("");
 
   const navigate = useNavigate();
 
@@ -16,8 +22,23 @@ export const SearchArticle = (props) => {
     navigate("/post");
   };
 
+  const filterData = async () => {
+    await axios
+      .get("http://localhost:8082/api/articles/filter", {
+        params: {
+          practice: practice,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log("error:" + err);
+      });
+  };
+
   const columns = [
-    { field: "id", headerName: "ID", hide: true },
+    { field: "id", headerName: "ID", hide: true },``
     {
       field: "title",
       headerName: "Title",
@@ -111,7 +132,6 @@ export const SearchArticle = (props) => {
     publishedDate: row.published_date,
     publishers: row.publisher,
   }));
-
   return (
     <body>
       <button id="homeButton" onClick={navigateHome}>
@@ -122,7 +142,7 @@ export const SearchArticle = (props) => {
       </button>
       <div id="contentContainer">
         <div id="selectionContainer">
-          <select>
+          <select onChange={(data) => setPractice(data.target.value)}>
             <option disabled selected>
               SE Practice
             </option>
@@ -130,7 +150,7 @@ export const SearchArticle = (props) => {
             <option>BDD</option>
             <option>Agile</option>
           </select>
-          <select>
+          <select onChange={(data) => setClaim(data.target.value)}>
             <option disabled selected>
               Claim
             </option>
@@ -138,7 +158,7 @@ export const SearchArticle = (props) => {
             <option>Detrimental to development</option>
             <option>Reduces development time</option>
           </select>
-          <select>
+          <select onChange={(data) => setStartPubDate(data.target.value)}>
             <option disabled selected>
               Start Publication Year
             </option>
@@ -146,7 +166,7 @@ export const SearchArticle = (props) => {
             <option>2021</option>
             <option>2022</option>
           </select>
-          <select>
+          <select onChange={(data) => setEndPubDate(data.target.value)}>
             <option disabled selected>
               End Publication Year
             </option>
@@ -154,7 +174,7 @@ export const SearchArticle = (props) => {
             <option>2021</option>
             <option>2022</option>
           </select>
-          <button id="searchButton">
+          <button id="searchButton" onClick={filterData}>
             <h6 className="gradient-text">Search</h6>
           </button>
         </div>

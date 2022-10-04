@@ -209,6 +209,7 @@ export const SearchArticle = () => {
             rowsPerPageOptions={[5]}
             disableSelectionOnClick
             experimentalFeatures={{ newEditingApi: true }}
+            disableColumnMenu
           />
         </Box>
       </div>

@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+table {
+  margin-top: 2%;
+  width: auto;
+  border: 2px solid white;
+  text-align: center;
+}
+th,
+td {
+  border: 2px solid white;
+  padding: 10px;
+  font-weight: bold;
+}
+
+#selectionContainer {
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  justify-content: space-between;
+  align-items: center;
+}
+#selectionContainer > select{
+padding: 0 10px 0 10px;
+}
+
+#contentContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#sortButton{
+  background-color: transparent;
+  border: 0;
+  color: white;
+  font-weight: 800;
+  padding: 0 5px 0 5px;
+}

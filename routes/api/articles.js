@@ -13,8 +13,8 @@ router.get("/", (req, res) => {
     );
 });
 
-router.get("/:id", (req, res) => {
-  Article.findById(req.params.id)
+router.get("/filter", async (req, res) => {
+  Article.find(req.query)
     .then((article) => res.json(article))
     .catch((err) =>
       res.status(404).json({ noarticlesfound: "No Articles found" })

@@ -27,6 +27,10 @@ export const SubmitForm = () => {
     navigate("/");
   };
 
+  const navigateSearch = () => {
+    navigate("/search");
+  };
+
   const postArticle = (e) => {
     e.preventDefault();
     const submissionData = {
@@ -73,7 +77,6 @@ export const SubmitForm = () => {
     let reader = new FileReader();
     reader.onload = async (e) => {
       const bibtexContent = e.target.result;
-      console.log(bibtexContent);
     };
     reader.readAsText(e.target.files[0]);
   };
@@ -83,7 +86,7 @@ export const SubmitForm = () => {
       <button id="homeButton" onClick={navigateHome}>
         <h6 className="gradient-text">Home</h6>
       </button>
-      <button id="searchButton">
+      <button id="searchButton" onClick={navigateSearch}>
         <h6 className="gradient-text">Search Articles</h6>
       </button>
       <div className="container">
@@ -142,13 +145,20 @@ export const SubmitForm = () => {
               <option value="TDD">TDD</option>
               <option value="BDD">BDD</option>
             </select>
-            <input
-              type="text"
-              required
-              placeholder="Claim"
-              value={claim}
-              onChange={(claim) => setClaim(claim.target.value)}
-            ></input>
+            <select onChange={(claim) => setClaim(claim.target.value)}>
+              <option value="" disabled selected>
+                Claim
+              </option>
+              <option value="Beneficial to quality">
+                Beneficial to quality
+              </option>
+              <option value="Detrimental to development">
+                Detrimental to development
+              </option>
+              <option value="Reduces development time">
+                Reduces development time
+              </option>
+            </select>
             <input
               type="text"
               required

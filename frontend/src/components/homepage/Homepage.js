@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 export const Homepage = () => {
   const navigate = useNavigate();
 
+  const navigateSearch = () => {
+    navigate("/search");
+  };
+
   const navigateSubmit = () => {
     navigate("/post");
   };
@@ -12,7 +16,7 @@ export const Homepage = () => {
     <div className="titleContainer">
       <h1 className="title-text">SPEED</h1>
       <div className="buttonContainer">
-        <button id="homeSearchButton">
+        <button id="homeSearchButton" onClick={navigateSearch}>
           <h6 className="gradient-text">Search Articles</h6>
         </button>
         <button id="homeSubmitButton" onClick={navigateSubmit}>

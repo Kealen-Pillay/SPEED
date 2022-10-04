@@ -6,8 +6,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useState } from "react";
 
-export const SearchArticle = (props) => {
-  const { articles } = props;
+export const SearchArticle = () => {
   const [articleList, setArticleList] = useState([]);
   const [practice, setPractice] = useState("");
   const [claim, setClaim] = useState("");
@@ -15,8 +14,31 @@ export const SearchArticle = (props) => {
   const [endPubDate, setEndPubDate] = useState("");
 
   useEffect(() => {
+    const filterData = async () => {
+      const url = new URL("http://localhost:8082/api/articles/filter");
+      if (practice !== "") {
+        url.searchParams.append("practice", practice);
+      }
+      // if (claim !== "") {
+      //   url.searchParams.append("claim", claim);
+      // }
+      console.log(url);
+      await axios
+        .get(url)
+        .then((res) => {
+          setArticleList(res.data);
+        })
+        .catch((err) => {
+          console.log("error:" + err);
+        });
+    };
     filterData();
+    // console.log(claim);
   }, [practice, claim]);
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const navigate = useNavigate();
 
@@ -27,18 +49,12 @@ export const SearchArticle = (props) => {
     navigate("/post");
   };
 
-  const filterData = async () => {
-    const url = new URL("http://localhost:8082/api/articles/filter");
-    if (practice !== "") {
-      url.searchParams.append("practice", practice);
-    }
-    if (claim !== "claim") {
-      url.searchParams.append("claim", claim);
-    }
+  const getData = async () => {
     await axios
-      .get(url)
+      .get("http://localhost:8082/api/articles")
       .then((res) => {
-        setArticleList(res);
+        console.log(res.data);
+        setArticleList(res.data);
       })
       .catch((err) => {
         console.log("error:" + err);
@@ -125,21 +141,23 @@ export const SearchArticle = (props) => {
     },
   ];
 
-  const rows = articles.map((row) => ({
-    id: row._id,
-    title: row.title,
-    journal: row.journalName,
-    volume: row.volume,
-    pages: row.pages,
-    doi: row.doi,
-    practice: row.practice,
-    claim: row.claim,
-    researchType: row.researchType,
-    author: row.author,
-    description: row.description,
-    publishedDate: row.published_date,
-    publishers: row.publisher,
-  }));
+  const rows =
+    articleList.length > 0 &&
+    articleList.map((row) => ({
+      id: row._id,
+      title: row.title,
+      journal: row.journalName,
+      volume: row.volume,
+      pages: row.pages,
+      doi: row.doi,
+      practice: row.practice,
+      claim: row.claim,
+      researchType: row.researchType,
+      author: row.author,
+      description: row.description,
+      publishedDate: row.published_date,
+      publishers: row.publisher,
+    }));
 
   return (
     <body>
@@ -152,7 +170,7 @@ export const SearchArticle = (props) => {
       <div id="contentContainer">
         <div id="selectionContainer">
           <select onChange={(data) => setPractice(data.target.value)}>
-            <option disabled selected>
+            <option disabled selected value="">
               SE Practice
             </option>
             <option>TDD</option>
@@ -160,7 +178,7 @@ export const SearchArticle = (props) => {
             <option>Agile</option>
           </select>
           <select onChange={(data) => setClaim(data.target.value)}>
-            <option disabled selected>
+            <option disabled selected value="">
               Claim
             </option>
             <option>Beneficial to quality</option>
@@ -183,7 +201,7 @@ export const SearchArticle = (props) => {
             <option>2021</option>
             <option>2022</option>
           </select>
-          <button id="searchButton" onClick={filterData}>
+          <button id="searchButton">
             <h6 className="gradient-text">Search</h6>
           </button>
         </div>

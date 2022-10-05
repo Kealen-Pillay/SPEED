@@ -203,21 +203,25 @@ export const ModerateArticle = () => {
           <FormGroup
             row
             sx={{
-              backgroundColor: "#1e1e1e",
+              backgroundColor: "rgba(255, 95, 109,0.5)",
               borderRadius: 5,
               width: "30%",
               marginTop: "5%",
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "5px 10px 5px 10px",
+              border: 1,
             }}
           >
             <FormControlLabel
               control={<Checkbox defaultChecked />}
               label="Credibility"
-              sx={{ color: "white", justifyContent: "space-between" }}
+              sx={{ color: "white", marginTop: "1%" }}
             />
             <FormControlLabel
               control={<Checkbox defaultChecked />}
               label="Reliability"
-              sx={{ color: "white" }}
+              sx={{ color: "white", marginTop: "1%" }}
             />
             <Button
               sx={{

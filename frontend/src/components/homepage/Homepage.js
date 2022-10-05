@@ -27,7 +27,7 @@ export const Homepage = () => {
         <button id="homeSubmitButton" onClick={navigateSubmit}>
           <h6 className="gradient-text">Submit Article</h6>
         </button>
-        <button id="moderatorButton" onClick={navigateSubmit}>
+        <button id="moderatorButton" onClick={navigateModeratorPage}>
           <h6 className="gradient-text">Moderate Articles</h6>
         </button>
       </div>

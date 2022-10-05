@@ -220,7 +220,7 @@ export const ModerateArticle = () => {
             />
             <FormControlLabel
               control={<Checkbox defaultChecked />}
-              label="Reliability"
+              label="Relevancy"
               sx={{ color: "white", marginTop: "1%" }}
             />
             <Button

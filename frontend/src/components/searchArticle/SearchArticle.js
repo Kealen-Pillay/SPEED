@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useState } from "react";
-import { textAlign } from "@mui/system";
 
 export const SearchArticle = () => {
   const [articleList, setArticleList] = useState([]);

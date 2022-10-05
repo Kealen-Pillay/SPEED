@@ -201,7 +201,7 @@ export const SearchArticle = () => {
             <option>2022</option>
           </select>
         </div>
-        <Box sx={{ height: 400, width: "86%", marginTop: "5%" }}>
+        <Box sx={{ height: 400, width: "80%", marginTop: "5%",  }}>
           <DataGrid
             rows={rows}
             columns={columns}

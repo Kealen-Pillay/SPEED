@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import axios from "axios";
+import Button from "@mui/material/Button";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import "./ModerateArticle.css";
 
 export const ModerateArticle = () => {
@@ -173,30 +177,63 @@ export const ModerateArticle = () => {
       <button id="searchButton" onClick={navigateSearch}>
         <h6 className="gradient-text">Search Article</h6>
       </button>
-      <Box sx={{ height: 400, width: "86%", marginTop: "5%" }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
-          experimentalFeatures={{ newEditingApi: true }}
-          disableColumnMenu
-          onRowClick={(row) => {
-            setCurrentSelection(row.id);
-          }}
-          onSelectionModelChange={(selection) => {
-            let current = currentSelection;
-            if (selection[0] !== current) {
-              setArticleSelected(true);
-            } else {
-              setArticleSelected(!articleSelected);
-            }
-          }}
-        />
-      </Box>
-      {articleSelected && (
-          <button id="approveButton">Approve</button>
-      )}
+      <div id="contentContainer">
+        <Box sx={{ height: 400, width: "80%", marginTop: "5%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={5}
+            rowsPerPageOptions={[5]}
+            experimentalFeatures={{ newEditingApi: true }}
+            disableColumnMenu
+            onRowClick={(row) => {
+              setCurrentSelection(row.id);
+            }}
+            onSelectionModelChange={(selection) => {
+              let current = currentSelection;
+              if (selection[0] !== current) {
+                setArticleSelected(true);
+              } else {
+                setArticleSelected(!articleSelected);
+              }
+            }}
+          />
+        </Box>
+        {articleSelected && (
+          <FormGroup
+            row
+            sx={{
+              backgroundColor: "#1e1e1e",
+              borderRadius: 5,
+              width: "30%",
+              marginTop: "5%",
+            }}
+          >
+            <FormControlLabel
+              control={<Checkbox defaultChecked />}
+              label="Credibility"
+              sx={{ color: "white", justifyContent: "space-between" }}
+            />
+            <FormControlLabel
+              control={<Checkbox defaultChecked />}
+              label="Reliability"
+              sx={{ color: "white" }}
+            />
+            <Button
+              sx={{
+                backgroundColor: "#50c878",
+                color: "#fff",
+                "&:hover": {
+                  backgroundColor: "#50c878",
+                },
+              }}
+              variant="contained"
+            >
+              Approve
+            </Button>
+          </FormGroup>
+        )}
+      </div>
     </body>
   );
 };

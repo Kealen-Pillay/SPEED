@@ -205,7 +205,7 @@ export const ModerateArticle = () => {
             sx={{
               backgroundColor: "rgba(255, 95, 109,0.5)",
               borderRadius: 5,
-              width: "30%",
+              width: "40%",
               marginTop: "5%",
               justifyContent: "space-between",
               alignItems: "center",
@@ -234,6 +234,18 @@ export const ModerateArticle = () => {
               variant="contained"
             >
               Approve
+            </Button>
+            <Button
+              sx={{
+                backgroundColor: "#e84746",
+                color: "#fff",
+                "&:hover": {
+                  backgroundColor: "#e84746",
+                },
+              }}
+              variant="contained"
+            >
+              Reject
             </Button>
           </FormGroup>
         )}

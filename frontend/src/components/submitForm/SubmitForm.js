@@ -46,9 +46,12 @@ export const SubmitForm = () => {
       description: description,
       published_date: publishedDate,
       publisher: publisher,
+      credible: "pending",
+      approvalStatus: "pending",
+      relevancyStatus: "pending",
     };
     axios
-      .post("/api/articles", submissionData)
+      .post("http://localhost:8082/api/articles", submissionData) //change back to remove localhost
       .then((res) => {
         setTitle("");
         setJournalName("");

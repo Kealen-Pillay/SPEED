@@ -16,6 +16,7 @@ export const SearchArticle = () => {
   useEffect(() => {
     const filterData = async () => {
       const url = new URL("http://localhost:8082/api/articles/filter");
+      url.searchParams.append("approvalStatus", "approved");
       if (practice !== "") {
         url.searchParams.append("practice", practice);
       }

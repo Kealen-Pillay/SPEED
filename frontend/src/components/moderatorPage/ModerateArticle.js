@@ -22,7 +22,7 @@ export const ModerateArticle = () => {
 
   useEffect(() => {
     getData();
-  }, [approveClicked, rejectClicked]);
+  }, []);
 
   const navigateHome = () => {
     navigate("/");
@@ -42,6 +42,22 @@ export const ModerateArticle = () => {
       .get(url)
       .then((res) => {
         setArticleList(res.data);
+      })
+      .catch((err) => {
+        console.log("error:" + err);
+      });
+  };
+
+  const handleApprove = async () => {
+    const url = "http://localhost:8082/api/articles/" + currentSelection;
+    await axios
+      .put(url, {
+        approvalStatus: "approved",
+        credible: "credible",
+        relevancyStatus: "relevant",
+      })
+      .then((res) => {
+        getData();
       })
       .catch((err) => {
         console.log("error:" + err);
@@ -240,6 +256,7 @@ export const ModerateArticle = () => {
               sx={{ color: "white", marginTop: "1%" }}
             />
             <Button
+              onClick={handleApprove}
               disabled={credibilityChecked && relevancyChecked ? false : true}
               sx={{
                 backgroundColor: "#50c878",

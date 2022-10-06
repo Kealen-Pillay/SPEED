@@ -14,11 +14,15 @@ export const ModerateArticle = () => {
   const [articleList, setArticleList] = useState([]);
   const [articleSelected, setArticleSelected] = useState(false);
   const [currentSelection, setCurrentSelection] = useState("");
+  const [credibilityChecked, setCredibilityChecked] = useState(false);
+  const [relevancyChecked, setRelevancyChecked] = useState(false);
+  const [approveClicked, setApproveClicked] = useState(false);
+  const [rejectClicked, setRejectClicked] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [approveClicked, rejectClicked]);
 
   const navigateHome = () => {
     navigate("/");
@@ -188,6 +192,10 @@ export const ModerateArticle = () => {
             disableColumnMenu
             onRowClick={(row) => {
               setCurrentSelection(row.id);
+              setRelevancyChecked(false);
+              setCredibilityChecked(false);
+              setApproveClicked(false);
+              setRejectClicked(false);
             }}
             onSelectionModelChange={(selection) => {
               let current = currentSelection;
@@ -214,16 +222,25 @@ export const ModerateArticle = () => {
             }}
           >
             <FormControlLabel
+              checked={credibilityChecked}
+              onChange={(event) => {
+                setCredibilityChecked(event.target.checked);
+              }}
               control={<Checkbox defaultChecked />}
               label="Credibility"
               sx={{ color: "white", marginTop: "1%" }}
             />
             <FormControlLabel
+              checked={relevancyChecked}
+              onChange={(event) => {
+                setRelevancyChecked(event.target.checked);
+              }}
               control={<Checkbox defaultChecked />}
               label="Relevancy"
               sx={{ color: "white", marginTop: "1%" }}
             />
             <Button
+              disabled={credibilityChecked && relevancyChecked ? false : true}
               sx={{
                 backgroundColor: "#50c878",
                 color: "#fff",

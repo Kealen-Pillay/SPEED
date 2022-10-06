@@ -37,6 +37,8 @@ export const ModerateArticle = () => {
   const getData = async () => {
     const url = new URL("http://localhost:8082/api/articles/filter"); //change to /api/articles
     url.searchParams.append("approvalStatus", "pending");
+    url.searchParams.append("approvalStatus", "rejected");
+
 
     await axios
       .get(url)
@@ -55,6 +57,22 @@ export const ModerateArticle = () => {
         approvalStatus: "approved",
         credible: "credible",
         relevancyStatus: "relevant",
+      })
+      .then((res) => {
+        getData();
+      })
+      .catch((err) => {
+        console.log("error:" + err);
+      });
+  };
+
+  const handleReject = async () => {
+    const url = "http://localhost:8082/api/articles/" + currentSelection;
+    await axios
+      .put(url, {
+        approvalStatus: "rejected",
+        credible: credibilityChecked ? "credible" : "not credible",
+        relevancyStatus: relevancyChecked ? "relevant" : "not relevant",
       })
       .then((res) => {
         getData();
@@ -270,6 +288,7 @@ export const ModerateArticle = () => {
               Approve
             </Button>
             <Button
+              onClick={handleReject}
               sx={{
                 backgroundColor: "#e84746",
                 color: "#fff",

@@ -10,8 +10,6 @@ export const SearchArticle = () => {
   const [articleList, setArticleList] = useState([]);
   const [practice, setPractice] = useState("");
   const [claim, setClaim] = useState("");
-  const [startPubDate, setStartPubDate] = useState("");
-  const [endPubDate, setEndPubDate] = useState("");
 
   useEffect(() => {
     const filterData = async () => {
@@ -184,24 +182,8 @@ export const SearchArticle = () => {
             <option>Detrimental to development</option>
             <option>Reduces development time</option>
           </select>
-          <select onChange={(data) => setStartPubDate(data.target.value)}>
-            <option disabled selected>
-              Start Publication Year
-            </option>
-            <option>2020</option>
-            <option>2021</option>
-            <option>2022</option>
-          </select>
-          <select onChange={(data) => setEndPubDate(data.target.value)}>
-            <option disabled selected>
-              End Publication Year
-            </option>
-            <option>2020</option>
-            <option>2021</option>
-            <option>2022</option>
-          </select>
         </div>
-        <Box sx={{ height: 400, width: "80%", marginTop: "5%",  }}>
+        <Box sx={{ height: 400, width: "80%", marginTop: "5%" }}>
           <DataGrid
             rows={rows}
             columns={columns}

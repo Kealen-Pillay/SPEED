@@ -122,6 +122,7 @@ export const SubmitForm = () => {
             ></input>
             <input
               type="number"
+              min="1"
               required
               placeholder="Volume"
               value={volume}

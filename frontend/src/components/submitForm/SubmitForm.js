@@ -46,9 +46,9 @@ export const SubmitForm = () => {
       description: description,
       published_date: publishedDate,
       publisher: publisher,
-      credible: "pending",
-      approvalStatus: "pending",
-      relevancyStatus: "pending",
+      credible: "Pending",
+      approvalStatus: "Pending",
+      relevancyStatus: "Pending",
     };
     axios
       .post("http://localhost:8082/api/articles", submissionData) //change back to remove localhost

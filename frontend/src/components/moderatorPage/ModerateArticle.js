@@ -41,10 +41,10 @@ export const ModerateArticle = () => {
   const handleSearch = async () => {
     const url = new URL("http://localhost:8082/api/articles/filter"); //change to /api/articles
     if (approvalStatus !== "Show All") {
-      url.searchParams.append("approvalStatus", approvalStatus.toLowerCase());
+      url.searchParams.append("approvalStatus", approvalStatus);
     } else {
-      url.searchParams.append("approvalStatus", "rejected");
-      url.searchParams.append("approvalStatus", "pending");
+      url.searchParams.append("approvalStatus", "Rejected");
+      url.searchParams.append("approvalStatus", "Pending");
     }
 
     await axios
@@ -59,8 +59,8 @@ export const ModerateArticle = () => {
 
   const getData = async () => {
     const url = new URL("http://localhost:8082/api/articles/filter"); //change to /api/articles
-    url.searchParams.append("approvalStatus", "pending");
-    url.searchParams.append("approvalStatus", "rejected");
+    url.searchParams.append("approvalStatus", "Pending");
+    url.searchParams.append("approvalStatus", "Rejected");
 
     await axios
       .get(url)
@@ -76,9 +76,9 @@ export const ModerateArticle = () => {
     const url = "http://localhost:8082/api/articles/" + currentSelection;
     await axios
       .put(url, {
-        approvalStatus: "approved",
-        credible: "credible",
-        relevancyStatus: "relevant",
+        approvalStatus: "Approved",
+        credible: "Credible",
+        relevancyStatus: "Relevant",
       })
       .then(() => {
         getData();
@@ -92,9 +92,9 @@ export const ModerateArticle = () => {
     const url = "http://localhost:8082/api/articles/" + currentSelection;
     await axios
       .put(url, {
-        approvalStatus: "rejected",
-        credible: credibilityChecked ? "credible" : "not credible",
-        relevancyStatus: relevancyChecked ? "relevant" : "not relevant",
+        approvalStatus: "Rejected",
+        credible: credibilityChecked ? "Credible" : "Not Credible",
+        relevancyStatus: relevancyChecked ? "Relevant" : "Not Relevant",
       })
       .then(() => {
         getData();
@@ -312,7 +312,7 @@ export const ModerateArticle = () => {
           <FormGroup
             row
             sx={{
-              backgroundColor: "rgba(255, 95, 109,0.5)",
+              backgroundColor: "white",
               borderRadius: 5,
               width: "40%",
               marginTop: "5%",
@@ -329,7 +329,7 @@ export const ModerateArticle = () => {
               }}
               control={<Checkbox defaultChecked />}
               label="Credibility"
-              sx={{ color: "white", marginTop: "1%" }}
+              sx={{ color: "black", marginTop: "1%" }}
             />
             <FormControlLabel
               checked={relevancyChecked}
@@ -338,7 +338,7 @@ export const ModerateArticle = () => {
               }}
               control={<Checkbox defaultChecked />}
               label="Relevancy"
-              sx={{ color: "white", marginTop: "1%" }}
+              sx={{ color: "black", marginTop: "1%" }}
             />
             <Button
               onClick={handleApprove}

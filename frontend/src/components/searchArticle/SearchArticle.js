@@ -24,7 +24,7 @@ export const SearchArticle = () => {
   useEffect(() => {
     const filterData = async () => {
       const url = new URL("http://localhost:8082/api/articles/filter");
-      url.searchParams.append("approvalStatus", "approved");
+      url.searchParams.append("approvalStatus", "Approved");
       if (practice !== "") {
         url.searchParams.append("practice", practice);
       }
@@ -71,7 +71,7 @@ export const SearchArticle = () => {
     console.log(searchText, practice, claim);
 
     const url = new URL("http://localhost:8082/api/articles/filter");
-    url.searchParams.append("approvalStatus", "approved");
+    url.searchParams.append("approvalStatus", "Approved");
     if (searchText !== "") {
       url.searchParams.append("title", searchText);
     }

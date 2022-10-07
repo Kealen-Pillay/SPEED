@@ -106,103 +106,111 @@ export const SubmitForm = () => {
         </select>
         {formatType === "form" ? (
           <form id="form" onSubmit={postArticle}>
-            <input
-              type="text"
-              required
-              placeholder="Title"
-              value={title}
-              onChange={(title) => setTitle(title.target.value)}
-            ></input>
-            <input
-              type="text"
-              required
-              placeholder="Journal Name"
-              value={journalName}
-              onChange={(journal) => setJournalName(journal.target.value)}
-            ></input>
-            <input
-              type="number"
-              min="1"
-              required
-              placeholder="Volume"
-              value={volume}
-              onChange={(volume) => setVolume(volume.target.value)}
-            ></input>
-            <input
-              type="text"
-              required
-              placeholder="Pages"
-              value={pages}
-              onChange={(pages) => setPages(pages.target.value)}
-            ></input>
-            <input
-              type="text"
-              required
-              placeholder="DOI Link"
-              value={DOI}
-              onChange={(DOI) => setDOI(DOI.target.value)}
-            ></input>
-            <select onChange={(practice) => setPractice(practice.target.value)}>
-              <option value="" disabled selected>
-                Practice
-              </option>
-              <option value="TDD">TDD</option>
-              <option value="BDD">BDD</option>
-            </select>
-            <select onChange={(claim) => setClaim(claim.target.value)}>
-              <option value="" disabled selected>
-                Claim
-              </option>
-              <option value="Beneficial to quality">
-                Beneficial to quality
-              </option>
-              <option value="Detrimental to development">
-                Detrimental to development
-              </option>
-              <option value="Reduces development time">
-                Reduces development time
-              </option>
-            </select>
-            <input
-              type="text"
-              required
-              placeholder="Research Type"
-              value={researchType}
-              onChange={(researchType) =>
-                setResearchType(researchType.target.value)
-              }
-            ></input>
-            <input
-              type="text"
-              required
-              placeholder="Author"
-              value={author}
-              onChange={(author) => setAuthor(author.target.value)}
-            ></input>
-            <input
-              type="text"
-              required
-              placeholder="Description"
-              value={description}
-              onChange={(description) =>
-                setDescription(description.target.value)
-              }
-            ></input>
-            <input
-              id="publishedDate"
-              type="date"
-              placeholder="Published Date"
-              required
-              onChange={(date) => setPublishedDate(date.target.value)}
-            ></input>
-            <input
-              type="text"
-              required
-              placeholder="Publisher"
-              value={publisher}
-              onChange={(publisher) => setPublisher(publisher.target.value)}
-            ></input>
-            <button type="submit">
+            <div className="formFields">
+              <div className="articleInfo">
+                <input
+                  type="text"
+                  required
+                  placeholder="Title"
+                  value={title}
+                  onChange={(title) => setTitle(title.target.value)}
+                ></input>
+                <input
+                  type="text"
+                  required
+                  placeholder="Pages"
+                  value={pages}
+                  onChange={(pages) => setPages(pages.target.value)}
+                ></input>
+                <select
+                  onChange={(practice) => setPractice(practice.target.value)}
+                >
+                  <option value="" disabled selected>
+                    Practice
+                  </option>
+                  <option value="TDD">TDD</option>
+                  <option value="BDD">BDD</option>
+                </select>
+                <select onChange={(claim) => setClaim(claim.target.value)}>
+                  <option value="" disabled selected>
+                    Claim
+                  </option>
+                  <option value="Beneficial to quality">
+                    Beneficial to quality
+                  </option>
+                  <option value="Detrimental to development">
+                    Detrimental to development
+                  </option>
+                  <option value="Reduces development time">
+                    Reduces development time
+                  </option>
+                </select>
+                <input
+                  type="text"
+                  required
+                  placeholder="Research Type"
+                  value={researchType}
+                  onChange={(researchType) =>
+                    setResearchType(researchType.target.value)
+                  }
+                ></input>
+                 <input
+                  type="text"
+                  required
+                  placeholder="Author"
+                  value={author}
+                  onChange={(author) => setAuthor(author.target.value)}
+                ></input>
+              </div>
+              <div className="journalInfo">
+                <input
+                  type="text"
+                  required
+                  placeholder="Journal Name"
+                  value={journalName}
+                  onChange={(journal) => setJournalName(journal.target.value)}
+                ></input>
+                <input
+                  type="number"
+                  min="1"
+                  required
+                  placeholder="Volume"
+                  value={volume}
+                  onChange={(volume) => setVolume(volume.target.value)}
+                ></input>
+                <input
+                  type="text"
+                  required
+                  placeholder="DOI Link"
+                  value={DOI}
+                  onChange={(DOI) => setDOI(DOI.target.value)}
+                ></input>
+                <input
+                  type="text"
+                  required
+                  placeholder="Description"
+                  value={description}
+                  onChange={(description) =>
+                    setDescription(description.target.value)
+                  }
+                ></input>
+                <input
+                  id="publishedDate"
+                  type="date"
+                  placeholder="Published Date"
+                  required
+                  onChange={(date) => setPublishedDate(date.target.value)}
+                ></input>
+                <input
+                  type="text"
+                  required
+                  placeholder="Publisher"
+                  value={publisher}
+                  onChange={(publisher) => setPublisher(publisher.target.value)}
+                ></input>
+              </div>
+            </div>
+            <button type="submit" className="submitButton">
               <h6 className="gradient-text">Submit Article</h6>
             </button>
           </form>

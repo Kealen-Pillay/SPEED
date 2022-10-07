@@ -14,7 +14,6 @@ import {
   InputLabel,
   FormControl,
 } from "@mui/material";
-import { flexbox } from "@mui/system";
 
 export const SearchArticle = () => {
   const [articleList, setArticleList] = useState([]);
@@ -73,7 +72,7 @@ export const SearchArticle = () => {
 
     const url = new URL("http://localhost:8082/api/articles/filter");
     url.searchParams.append("approvalStatus", "approved");
-    if (searchText != "") {
+    if (searchText !== "") {
       url.searchParams.append("title", searchText);
     }
     if (practice !== "") {
@@ -103,7 +102,7 @@ export const SearchArticle = () => {
     {
       field: "journal",
       headerName: "Journal",
-      width: 150,
+      width: 200,
       editable: false,
     },
     {
@@ -121,7 +120,7 @@ export const SearchArticle = () => {
     {
       field: "doi",
       headerName: "DOI",
-      width: 150,
+      width: 350,
       editable: false,
       renderCell: (doi) => (
         <Link href={`${doi.value}`} target="_blank">
@@ -138,7 +137,7 @@ export const SearchArticle = () => {
     {
       field: "claim",
       headerName: "Claim",
-      width: 150,
+      width: 220,
       editable: false,
     },
     {
@@ -151,14 +150,14 @@ export const SearchArticle = () => {
       field: "author",
       headerName: "Author",
       type: "string",
-      width: 110,
+      width: 180,
       editable: false,
     },
     {
       field: "description",
       headerName: "Description",
       type: "string",
-      width: 110,
+      width: 300,
       editable: false,
     },
     {
@@ -172,7 +171,7 @@ export const SearchArticle = () => {
       field: "publishers",
       headerName: "Publishers",
       type: "string",
-      width: 110,
+      width: 150,
       editable: false,
     },
   ];

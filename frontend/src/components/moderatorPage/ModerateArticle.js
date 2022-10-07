@@ -10,6 +10,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import "./ModerateArticle.css";
+import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
 
 export const ModerateArticle = () => {
   const [articleList, setArticleList] = useState([]);
@@ -19,6 +20,7 @@ export const ModerateArticle = () => {
   const [relevancyChecked, setRelevancyChecked] = useState(false);
   const [approveClicked, setApproveClicked] = useState(false);
   const [rejectClicked, setRejectClicked] = useState(false);
+  const [approvalStatus, setApprovalStatus] = useState("Show All");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +37,26 @@ export const ModerateArticle = () => {
   const navigateSearch = () => {
     navigate("/search");
   };
+
+  const handleSearch = async () => {
+    const url = new URL("http://localhost:8082/api/articles/filter"); //change to /api/articles
+    if (approvalStatus !== "Show All") {
+      url.searchParams.append("approvalStatus", approvalStatus.toLowerCase());
+    } else {
+      url.searchParams.append("approvalStatus", "rejected");
+      url.searchParams.append("approvalStatus", "pending");
+    }
+
+    await axios
+      .get(url)
+      .then((res) => {
+        setArticleList(res.data);
+      })
+      .catch((err) => {
+        console.log("error:" + err);
+      });
+  };
+
   const getData = async () => {
     const url = new URL("http://localhost:8082/api/articles/filter"); //change to /api/articles
     url.searchParams.append("approvalStatus", "pending");
@@ -87,7 +109,7 @@ export const ModerateArticle = () => {
       field: "approvalStatus",
       headerName: "Approval Status",
       type: "string",
-      width: 110,
+      width: 150,
       editable: false,
     },
     {
@@ -114,7 +136,7 @@ export const ModerateArticle = () => {
     {
       field: "journal",
       headerName: "Journal",
-      width: 150,
+      width: 200,
       editable: false,
     },
     {
@@ -132,22 +154,24 @@ export const ModerateArticle = () => {
     {
       field: "doi",
       headerName: "DOI",
-      width: 150,
+      width: 350,
       editable: false,
       renderCell: (doi) => (
-        <Link href={`${doi.value}`} target="_blank">{doi.value}</Link>
+        <Link href={`${doi.value}`} target="_blank">
+          {doi.value}
+        </Link>
       ),
     },
     {
       field: "practice",
       headerName: "Practice",
-      width: 120,
+      width: 150,
       editable: false,
     },
     {
       field: "claim",
       headerName: "Claim",
-      width: 200,
+      width: 220,
       editable: false,
     },
     {
@@ -160,7 +184,7 @@ export const ModerateArticle = () => {
       field: "author",
       headerName: "Author",
       type: "string",
-      width: 110,
+      width: 180,
       editable: false,
     },
     {
@@ -174,14 +198,14 @@ export const ModerateArticle = () => {
       field: "publishedDate",
       headerName: "Published Date",
       type: "string",
-      width: 150,
+      width: 110,
       editable: false,
     },
     {
       field: "publishers",
       headerName: "Publishers",
       type: "string",
-      width: 110,
+      width: 150,
       editable: false,
     },
   ];
@@ -219,7 +243,47 @@ export const ModerateArticle = () => {
         <h6 className="gradient-text">Search Article</h6>
       </button>
       <div id="contentContainer">
-        <Box sx={{ height: 400, width: "80%", marginTop: "5%" }}>
+        <h1>Moderator Page</h1>
+        <Box
+          sx={{
+            display: "flex",
+            width: "15%",
+            justifyContent: "space-between",
+            marginTop: "1%",
+            backgroundColor: "white",
+            padding: "0.5% 0.5% 0.5% 0.5%",
+            borderRadius: 5,
+          }}
+        >
+          <FormControl sx={{ width: "50%" }}>
+            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={approvalStatus}
+              label="Status"
+              onChange={(text) => setApprovalStatus(text.target.value)}
+            >
+              <MenuItem value={"Show All"}>Show All</MenuItem>
+              <MenuItem value={"Pending"}>Pending</MenuItem>
+              <MenuItem value={"Rejected"}>Rejected</MenuItem>
+            </Select>
+          </FormControl>
+          <Button
+            onClick={handleSearch}
+            variant="contained"
+            sx={{
+              backgroundColor: "#ff5f6d",
+              color: "#fff",
+              "&:hover": {
+                backgroundColor: "#ff5f6d",
+              },
+            }}
+          >
+            Search
+          </Button>
+        </Box>
+        <Box sx={{ height: 400, width: "80%", marginTop: "2%" }}>
           <DataGrid
             rows={rows}
             columns={columns}

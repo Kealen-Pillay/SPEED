@@ -14,6 +14,7 @@ import {
   InputLabel,
   FormControl,
 } from "@mui/material";
+import { flexbox } from "@mui/system";
 
 export const SearchArticle = () => {
   const [articleList, setArticleList] = useState([]);
@@ -214,7 +215,18 @@ export const SearchArticle = () => {
       </button>
       <div id="contentContainer">
         <h1>Search Articles</h1>
-        <div id="selectionContainer">
+        <Box
+          sx={{
+            width: "60%",
+            backgroundColor: "white",
+            borderRadius: 5,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0.5% 0.5% 0.5% 0.5%",
+            marginTop: "1%",
+          }}
+        >
           <TextField
             id="outlined-basic"
             label="Search Article"
@@ -223,22 +235,6 @@ export const SearchArticle = () => {
             value={searchText}
             onChange={(text) => setSearchText(text.target.value)}
           />
-          {/* <select onChange={(data) => setPractice(data.target.value)}>
-            <option selected value="">
-              Show All SE Practices
-            </option>
-            <option>TDD</option>
-            <option>BDD</option>
-            <option>Agile</option>
-          </select>
-          <select onChange={(data) => setClaim(data.target.value)}>
-            <option selected value="">
-              Show All Claims
-            </option>
-            <option>Beneficial to quality</option>
-            <option>Detrimental to development</option>
-            <option>Reduces development time</option>
-          </select> */}
           <FormControl sx={{ width: "20%" }}>
             <InputLabel id="demo-simple-select-label">Practice</InputLabel>
             <Select
@@ -279,17 +275,17 @@ export const SearchArticle = () => {
             onClick={handleSearch}
             variant="contained"
             sx={{
-              backgroundColor: "#1e1e1e",
+              backgroundColor: "#ff5f6d",
               color: "#fff",
               "&:hover": {
-                backgroundColor: "#1e1e1e",
+                backgroundColor: "#ff5f6d",
               },
             }}
           >
             Search
           </Button>
-        </div>
-        <Box sx={{ height: 400, width: "80%", marginTop: "5%" }}>
+        </Box>
+        <Box sx={{ height: 400, width: "80%", marginTop: "2%" }}>
           <DataGrid
             rows={rows}
             columns={columns}

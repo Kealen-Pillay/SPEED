@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./SearchArticle.css";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useState } from "react";
@@ -88,6 +89,11 @@ export const SearchArticle = () => {
       headerName: "DOI",
       width: 150,
       editable: false,
+      renderCell: (doi) => (
+        <Link href={`${doi.value}`} target="_blank">
+          {doi.value}
+        </Link>
+      ),
     },
     {
       field: "practice",

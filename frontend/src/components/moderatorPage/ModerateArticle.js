@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
+import Link from "@mui/material/Link";
 import { Box } from "@mui/material";
 import axios from "axios";
 import Button from "@mui/material/Button";
@@ -39,7 +40,6 @@ export const ModerateArticle = () => {
     url.searchParams.append("approvalStatus", "pending");
     url.searchParams.append("approvalStatus", "rejected");
 
-
     await axios
       .get(url)
       .then((res) => {
@@ -58,7 +58,7 @@ export const ModerateArticle = () => {
         credible: "credible",
         relevancyStatus: "relevant",
       })
-      .then((res) => {
+      .then(() => {
         getData();
       })
       .catch((err) => {
@@ -74,7 +74,7 @@ export const ModerateArticle = () => {
         credible: credibilityChecked ? "credible" : "not credible",
         relevancyStatus: relevancyChecked ? "relevant" : "not relevant",
       })
-      .then((res) => {
+      .then(() => {
         getData();
       })
       .catch((err) => {
@@ -134,6 +134,9 @@ export const ModerateArticle = () => {
       headerName: "DOI",
       width: 150,
       editable: false,
+      renderCell: (doi) => (
+        <Link href={`${doi.value}`} target="_blank">{doi.value}</Link>
+      ),
     },
     {
       field: "practice",

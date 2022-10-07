@@ -138,7 +138,7 @@ export const SubmitForm = () => {
             <input
               type="text"
               required
-              placeholder="DOI"
+              placeholder="DOI Link"
               value={DOI}
               onChange={(DOI) => setDOI(DOI.target.value)}
             ></input>

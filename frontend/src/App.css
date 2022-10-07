@@ -11,9 +11,11 @@ button {
 
 body {
   background: linear-gradient(115deg, #ff5f6d, #ffc371);
-  background-size: 200% 200%;
+  background-size: 150% 150%;
   animation: gradient-animation 30s ease infinite;
   color: white;
+  height: 100vh;
+  width: 100vw;
 }
 
 @-webkit-keyframes gradient-animation {

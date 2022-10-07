@@ -247,7 +247,7 @@ export const ModerateArticle = () => {
         <Box
           sx={{
             display: "flex",
-            width: "15%",
+            width: "20%",
             justifyContent: "space-between",
             marginTop: "1%",
             backgroundColor: "white",

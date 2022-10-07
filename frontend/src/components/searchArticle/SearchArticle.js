@@ -6,11 +6,20 @@ import Link from "@mui/material/Link";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useState } from "react";
+import {
+  TextField,
+  Button,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 
 export const SearchArticle = () => {
   const [articleList, setArticleList] = useState([]);
   const [practice, setPractice] = useState("");
   const [claim, setClaim] = useState("");
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     const filterData = async () => {
@@ -32,7 +41,7 @@ export const SearchArticle = () => {
         });
     };
     filterData();
-  }, [practice, claim]);
+  }, []);
 
   useEffect(() => {
     getData();
@@ -50,6 +59,30 @@ export const SearchArticle = () => {
   const getData = async () => {
     await axios
       .get("/api/articles")
+      .then((res) => {
+        setArticleList(res.data);
+      })
+      .catch((err) => {
+        console.log("error:" + err);
+      });
+  };
+
+  const handleSearch = async () => {
+    console.log(searchText, practice, claim);
+
+    const url = new URL("http://localhost:8082/api/articles/filter");
+    url.searchParams.append("approvalStatus", "approved");
+    if (searchText != "") {
+      url.searchParams.append("title", searchText);
+    }
+    if (practice !== "") {
+      url.searchParams.append("practice", practice);
+    }
+    if (claim !== "") {
+      url.searchParams.append("claim", claim);
+    }
+    await axios
+      .get(url)
       .then((res) => {
         setArticleList(res.data);
       })
@@ -161,6 +194,16 @@ export const SearchArticle = () => {
       publishers: row.publisher,
     }));
 
+  const handlePracticeChange = (e) => {
+    e.preventDefault();
+    setPractice(e.target.value);
+  };
+
+  const handleClaimChange = (e) => {
+    e.preventDefault();
+    setClaim(e.target.value);
+  };
+
   return (
     <body>
       <button id="homeButton" onClick={navigateHome}>
@@ -172,7 +215,15 @@ export const SearchArticle = () => {
       <div id="contentContainer">
         <h1>Search Articles</h1>
         <div id="selectionContainer">
-          <select onChange={(data) => setPractice(data.target.value)}>
+          <TextField
+            id="outlined-basic"
+            label="Search Article"
+            variant="outlined"
+            sx={{ width: "30%" }}
+            value={searchText}
+            onChange={(text) => setSearchText(text.target.value)}
+          />
+          {/* <select onChange={(data) => setPractice(data.target.value)}>
             <option selected value="">
               Show All SE Practices
             </option>
@@ -187,7 +238,56 @@ export const SearchArticle = () => {
             <option>Beneficial to quality</option>
             <option>Detrimental to development</option>
             <option>Reduces development time</option>
-          </select>
+          </select> */}
+          <FormControl sx={{ width: "20%" }}>
+            <InputLabel id="demo-simple-select-label">Practice</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={practice}
+              label="Practice"
+              onChange={handlePracticeChange}
+            >
+              <MenuItem value={""}>Show All</MenuItem>
+              <MenuItem value={"TDD"}>TDD</MenuItem>
+              <MenuItem value={"BDD"}>BDD</MenuItem>
+              <MenuItem value={"Agile"}>Agile</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ width: "20%" }}>
+            <InputLabel id="demo-simple-select-label">Claim</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={claim}
+              label="Practice"
+              onChange={handleClaimChange}
+            >
+              <MenuItem value={""}>Show All</MenuItem>
+              <MenuItem value={"Beneficial to quality"}>
+                Beneficial to quality
+              </MenuItem>
+              <MenuItem value={"Detrimental to development"}>
+                Detrimental to development
+              </MenuItem>
+              <MenuItem value={"Reduces development time"}>
+                Reduces development time
+              </MenuItem>
+            </Select>
+          </FormControl>
+          <Button
+            onClick={handleSearch}
+            variant="contained"
+            sx={{
+              backgroundColor: "#1e1e1e",
+              color: "#fff",
+              "&:hover": {
+                backgroundColor: "#1e1e1e",
+              },
+            }}
+          >
+            Search
+          </Button>
         </div>
         <Box sx={{ height: 400, width: "80%", marginTop: "5%" }}>
           <DataGrid

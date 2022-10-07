@@ -22,12 +22,13 @@ td {
 #selectionContainer {
   display: flex;
   flex-direction: row;
-  width: 30%;
+  width: 50%;
   justify-content: space-between;
   align-items: center;
+  margin-top: 1%;
 }
-#selectionContainer > select{
-padding: 0 10px 0 10px;
+#selectionContainer > select {
+  padding: 0 10px 0 10px;
 }
 
 #contentContainer {
@@ -37,7 +38,7 @@ padding: 0 10px 0 10px;
   align-items: center;
 }
 
-#sortButton{
+#sortButton {
   background-color: transparent;
   border: 0;
   color: white;

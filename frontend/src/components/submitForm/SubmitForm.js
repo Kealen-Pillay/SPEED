@@ -51,7 +51,7 @@ export const SubmitForm = () => {
       relevancyStatus: "Pending",
     };
     axios
-      .post("http://localhost:8082/api/articles", submissionData) //change back to remove localhost
+      .post("/api/articles", submissionData)
       .then((res) => {
         setTitle("");
         setJournalName("");

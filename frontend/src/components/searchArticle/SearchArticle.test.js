@@ -16,13 +16,13 @@ test("Renders Search Article Page", async () => {
   expect(searchScreen).toBeInTheDocument();
 });
 
-test("Render of title column in table", async () => {
+test("Render of title column in table", () => {
   render(<App />);
   const title = screen.getByRole("columnheader", { name: /Title/i });
   expect(title).toBeInTheDocument();
 });
 
-test("Render of volume column in table", async () => {
+test("Render of volume column in table", () => {
   render(<App />);
   const vol = screen.getByRole("columnheader", { name: /Volume/i });
   expect(vol).toBeInTheDocument();

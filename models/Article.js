@@ -49,6 +49,18 @@ const ArticleSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  credible: {
+    type: String,
+    required: false,
+  },
+  approvalStatus: {
+    type: String,
+    required: false,
+  },
+  relevancyStatus: {
+    type: String,
+    required: false,
+  },
   updated_date: {
     type: Date,
     default: Date.now,

@@ -2,21 +2,29 @@ import React, { useEffect } from "react";
 import "./SearchArticle.css";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
+import Link from "@mui/material/Link";
 import { DataGrid } from "@mui/x-data-grid";
 import axios from "axios";
 import { useState } from "react";
-import { textAlign } from "@mui/system";
+import {
+  TextField,
+  Button,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 
 export const SearchArticle = () => {
   const [articleList, setArticleList] = useState([]);
   const [practice, setPractice] = useState("");
   const [claim, setClaim] = useState("");
-  const [startPubDate, setStartPubDate] = useState("");
-  const [endPubDate, setEndPubDate] = useState("");
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     const filterData = async () => {
       const url = new URL("http://localhost:8082/api/articles/filter");
+      url.searchParams.append("approvalStatus", "Approved");
       if (practice !== "") {
         url.searchParams.append("practice", practice);
       }
@@ -33,7 +41,7 @@ export const SearchArticle = () => {
         });
     };
     filterData();
-  }, [practice, claim]);
+  }, []);
 
   useEffect(() => {
     getData();
@@ -59,6 +67,30 @@ export const SearchArticle = () => {
       });
   };
 
+  const handleSearch = async () => {
+    console.log(searchText, practice, claim);
+
+    const url = new URL("http://localhost:8082/api/articles/filter");
+    url.searchParams.append("approvalStatus", "Approved");
+    if (searchText !== "") {
+      url.searchParams.append("title", searchText);
+    }
+    if (practice !== "") {
+      url.searchParams.append("practice", practice);
+    }
+    if (claim !== "") {
+      url.searchParams.append("claim", claim);
+    }
+    await axios
+      .get(url)
+      .then((res) => {
+        setArticleList(res.data);
+      })
+      .catch((err) => {
+        console.log("error:" + err);
+      });
+  };
+
   const columns = [
     { field: "id", headerName: "ID", hide: true },
     {
@@ -70,7 +102,7 @@ export const SearchArticle = () => {
     {
       field: "journal",
       headerName: "Journal",
-      width: 150,
+      width: 200,
       editable: false,
     },
     {
@@ -88,8 +120,13 @@ export const SearchArticle = () => {
     {
       field: "doi",
       headerName: "DOI",
-      width: 150,
+      width: 350,
       editable: false,
+      renderCell: (doi) => (
+        <Link href={`${doi.value}`} target="_blank">
+          {doi.value}
+        </Link>
+      ),
     },
     {
       field: "practice",
@@ -100,7 +137,7 @@ export const SearchArticle = () => {
     {
       field: "claim",
       headerName: "Claim",
-      width: 150,
+      width: 220,
       editable: false,
     },
     {
@@ -113,14 +150,14 @@ export const SearchArticle = () => {
       field: "author",
       headerName: "Author",
       type: "string",
-      width: 110,
+      width: 180,
       editable: false,
     },
     {
       field: "description",
       headerName: "Description",
       type: "string",
-      width: 110,
+      width: 300,
       editable: false,
     },
     {
@@ -134,7 +171,7 @@ export const SearchArticle = () => {
       field: "publishers",
       headerName: "Publishers",
       type: "string",
-      width: 110,
+      width: 150,
       editable: false,
     },
   ];
@@ -157,6 +194,16 @@ export const SearchArticle = () => {
       publishers: row.publisher,
     }));
 
+  const handlePracticeChange = (e) => {
+    e.preventDefault();
+    setPractice(e.target.value);
+  };
+
+  const handleClaimChange = (e) => {
+    e.preventDefault();
+    setClaim(e.target.value);
+  };
+
   return (
     <body>
       <button id="homeButton" onClick={navigateHome}>
@@ -167,41 +214,77 @@ export const SearchArticle = () => {
       </button>
       <div id="contentContainer">
         <h1>Search Articles</h1>
-        <div id="selectionContainer">
-          <select onChange={(data) => setPractice(data.target.value)}>
-            <option selected value="">
-              Show All SE Practices
-            </option>
-            <option>TDD</option>
-            <option>BDD</option>
-            <option>Agile</option>
-          </select>
-          <select onChange={(data) => setClaim(data.target.value)}>
-            <option selected value="">
-              Show All Claims
-            </option>
-            <option>Beneficial to quality</option>
-            <option>Detrimental to development</option>
-            <option>Reduces development time</option>
-          </select>
-          <select onChange={(data) => setStartPubDate(data.target.value)}>
-            <option disabled selected>
-              Start Publication Year
-            </option>
-            <option>2020</option>
-            <option>2021</option>
-            <option>2022</option>
-          </select>
-          <select onChange={(data) => setEndPubDate(data.target.value)}>
-            <option disabled selected>
-              End Publication Year
-            </option>
-            <option>2020</option>
-            <option>2021</option>
-            <option>2022</option>
-          </select>
-        </div>
-        <Box sx={{ height: 400, width: "86%", marginTop: "5%" }}>
+        <Box
+          sx={{
+            width: "60%",
+            backgroundColor: "white",
+            borderRadius: 5,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0.5% 0.5% 0.5% 0.5%",
+            marginTop: "1%",
+          }}
+        >
+          <TextField
+            id="outlined-basic"
+            label="Search Article"
+            variant="outlined"
+            sx={{ width: "30%" }}
+            value={searchText}
+            onChange={(text) => setSearchText(text.target.value)}
+          />
+          <FormControl sx={{ width: "20%" }}>
+            <InputLabel id="demo-simple-select-label">Practice</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={practice}
+              label="Practice"
+              onChange={handlePracticeChange}
+            >
+              <MenuItem value={""}>Show All</MenuItem>
+              <MenuItem value={"TDD"}>TDD</MenuItem>
+              <MenuItem value={"BDD"}>BDD</MenuItem>
+              <MenuItem value={"Agile"}>Agile</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl sx={{ width: "20%" }}>
+            <InputLabel id="demo-simple-select-label">Claim</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={claim}
+              label="Practice"
+              onChange={handleClaimChange}
+            >
+              <MenuItem value={""}>Show All</MenuItem>
+              <MenuItem value={"Beneficial to quality"}>
+                Beneficial to quality
+              </MenuItem>
+              <MenuItem value={"Detrimental to development"}>
+                Detrimental to development
+              </MenuItem>
+              <MenuItem value={"Reduces development time"}>
+                Reduces development time
+              </MenuItem>
+            </Select>
+          </FormControl>
+          <Button
+            onClick={handleSearch}
+            variant="contained"
+            sx={{
+              backgroundColor: "#ff5f6d",
+              color: "#fff",
+              "&:hover": {
+                backgroundColor: "#ff5f6d",
+              },
+            }}
+          >
+            Search
+          </Button>
+        </Box>
+        <Box sx={{ height: 400, width: "80%", marginTop: "2%" }}>
           <DataGrid
             rows={rows}
             columns={columns}

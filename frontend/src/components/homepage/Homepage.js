@@ -12,6 +12,11 @@ export const Homepage = () => {
   const navigateSubmit = () => {
     navigate("/post");
   };
+
+  const navigateModeratorPage = () => {
+    navigate("/moderator");
+  };
+
   return (
     <div className="titleContainer">
       <h1 className="title-text">SPEED</h1>
@@ -21,6 +26,9 @@ export const Homepage = () => {
         </button>
         <button id="homeSubmitButton" onClick={navigateSubmit}>
           <h6 className="gradient-text">Submit Article</h6>
+        </button>
+        <button id="moderatorButton" onClick={navigateModeratorPage}>
+          <h6 className="gradient-text">Moderate Articles</h6>
         </button>
       </div>
     </div>

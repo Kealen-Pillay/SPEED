@@ -280,7 +280,7 @@ export const ModerateArticle = () => {
               },
             }}
           >
-            Search
+            Show Results
           </Button>
         </Box>
         <Box sx={{ height: 400, width: "80%", marginTop: "2%" }}>

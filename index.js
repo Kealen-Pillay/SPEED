@@ -2,20 +2,20 @@ const express = require("express");
 var cors = require("cors");
 const connectDB = require("./config/db");
 
-// routes
+
 const articles = require("./routes/api/articles");
 
 const app = express();
 const port = process.env.PORT || 8082;
 
-// cors
+
 app.use(cors({ origin: true, credentials: true }));
 
 app.use(express.json({ extended: false }));
 
 app.use("/api/articles", articles);
 
-// Connect Database
+
 connectDB();
 if(process.env.NODE_ENV === "production") {
     app.use(express.static(__dirname + "/frontend/build"));

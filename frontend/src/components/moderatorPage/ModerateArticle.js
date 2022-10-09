@@ -39,14 +39,12 @@ export const ModerateArticle = () => {
   };
 
   const handleSearch = async () => {
-    const url = new URL("http://localhost:8082/api/articles/filter");
+    let url = "/api/articles/filter?";
     if (approvalStatus !== "Show All") {
-      url.searchParams.append("approvalStatus", approvalStatus);
+      url += "approvalStatus=" + approvalStatus;
     } else {
-      url.searchParams.append("approvalStatus", "Rejected");
-      url.searchParams.append("approvalStatus", "Pending");
+      url += "approvalStatus=Pending&approvalStatus=Rejected";
     }
-
     await axios
       .get(url)
       .then((res) => {
@@ -58,10 +56,8 @@ export const ModerateArticle = () => {
   };
 
   const getData = async () => {
-    const url = new URL("http://localhost:8082/api/articles/filter");
-    url.searchParams.append("approvalStatus", "Pending");
-    url.searchParams.append("approvalStatus", "Rejected");
-
+    let url =
+      "/api/articles/filter?approvalStatus=Pending&approvalStatus=Rejected";
     await axios
       .get(url)
       .then((res) => {

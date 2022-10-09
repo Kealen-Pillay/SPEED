@@ -23,15 +23,6 @@ export const SearchArticle = () => {
 
   useEffect(() => {
     const filterData = async () => {
-      // const url = new URL("http://localhost:8082/api/articles/filter");
-      // url.searchParams.append("approvalStatus", "Approved");
-      // if (practice !== "") {
-      //   url.searchParams.append("practice", practice);
-      // }
-      // if (claim !== "") {
-      //   url.searchParams.append("claim", claim);
-      // }
-
       const url = "/api/articles/filter?approvalStatus=Approved";
       if (practice !== "") {
         url += "practice=" + practice;
@@ -77,18 +68,15 @@ export const SearchArticle = () => {
   };
 
   const handleSearch = async () => {
-    console.log(searchText, practice, claim);
-
-    const url = new URL("http://localhost:8082/api/articles/filter");
-    url.searchParams.append("approvalStatus", "Approved");
+    const url = "/api/articles/filter?approvalStatus=Approved";
     if (searchText !== "") {
-      url.searchParams.append("title", searchText);
+      url += "&title=" + searchText;
     }
     if (practice !== "") {
-      url.searchParams.append("practice", practice);
+      url += "&practice=" + practice;
     }
     if (claim !== "") {
-      url.searchParams.append("claim", claim);
+      url += "&claim=" + claim;
     }
     await axios
       .get(url)

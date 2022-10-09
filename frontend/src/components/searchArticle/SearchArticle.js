@@ -23,7 +23,16 @@ export const SearchArticle = () => {
 
   useEffect(() => {
     const filterData = async () => {
-      const url = "/api/articles/filter?approvalStatus=Approved";
+      let url = "/api/articles/filter?approvalStatus=Approved";
+      if (searchText !== "") {
+        url += "&title=" + searchText;
+      }
+      if (practice !== "") {
+        url += "&practice=" + practice;
+      }
+      if (claim !== "") {
+        url += "&claim=" + claim;
+      }
       await axios
         .get(url)
         .then((res) => {

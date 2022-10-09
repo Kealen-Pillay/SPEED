@@ -68,7 +68,7 @@ export const SearchArticle = () => {
   };
 
   const handleSearch = async () => {
-    const url = "/api/articles/filter?approvalStatus=Approved";
+    let url = "/api/articles/filter?approvalStatus=Approved";
     if (searchText !== "") {
       url += "&title=" + searchText;
     }
